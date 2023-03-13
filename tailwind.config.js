@@ -4,7 +4,17 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      borderColor: {
+        'gray-100': '#fff',
+      },
+    }, 
+    colors: {
+      papasred: "#AD192A",
+      papaslightred: "#F1E8EA",
+      papaswhite: "#fff",
+      papasblack: "#181818",
+    },
   },
   plugins: [],
 }
