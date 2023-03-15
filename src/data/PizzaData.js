@@ -3,7 +3,7 @@ export const data = [
       id: 1,
       name: "Pepperoni",
       type: "savoury",
-      image: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      image: "https://imgs.search.brave.com/PCcsW7f_2Q075kNgvxHAAVxsnDJ44uzshHdjB9G9JCo/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly9yaW90/ZmVzdC5vcmcvd3At/Y29udGVudC91cGxv/YWRzLzIwMTYvMTAv/MTZpbi1wZXBwZXJv/bmktMS5qcGc",
       price: {
         small: 8.99,
         medium: 10.99,
@@ -25,7 +25,7 @@ export const data = [
       id: 3,
       name: "Hawaiian",
       type: "savoury",
-      image: "https://images.pexels.com/photos/905847/pexels-photo-905847.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      image: "https://imgs.search.brave.com/VqbT7bensYywKMFr_F0Z0NGFpF2_gE__xQQrmM2001w/rs:fit:1200:1200:1/g:ce/aHR0cHM6Ly9pMS53/cC5jb20vZGV1c2V4/bWFnaWNhbGdpcmwu/Y29tL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDE2LzA2L21heHJl/c2RlZmF1bHQuanBn/P2ZpdD0yNTkyJTJD/MTkzNiZzc2w9MQ",
       price: {
         small: 9.99,
         medium: 11.99,

@@ -23,20 +23,22 @@ const Navbar = () => {
         <div className='text-papasred block md:hidden' onClick={handleNav}>
           {!nav ? <MdOutlineRestaurantMenu size={30} />: <MdClose size={36} />}
         </div>
-        <div
-          className={
-            !nav
-              ? 'ease-in-out duration-100 fixed left-[-100%]'
-              : 'fixed left-0 top-0 w-[50%] h-full border-r border-r-papasred bg-papaslightred ease-in-out duration-500'
-          }
-        >
-          <h1 className='w-full text-4xl font-bold text-papasred m-4 title-font'>Papa's Pizza</h1>
-          <ul className='text-papasred'>
-            <li className='p-4 text-2xl border-b border-gray-100'>Home</li>
-            <li className='p-4 text-2xl border-b border-gray-100'>Menu</li>
-            <li className='p-4 text-2xl border-b border-gray-100'>Location</li>
-            <li className='p-4 text-2xl border-b border-gray-100'>Contact</li>
-          </ul>
+        <div className=' z-50'>
+          <div
+            className={
+              !nav
+                ? 'ease-in-out duration-100 fixed left-[-100%]'
+                : 'fixed left-0 top-0 w-[60%] h-full border-r border-r-papasred bg-papaslightred ease-in-out duration-500'
+            }
+          >
+            <h1 className='w-full text-4xl font-bold text-papasred m-4 title-font'>Papa's Pizza</h1>
+            <ul className='text-papasred'>
+              <li className='p-4 text-2xl border-b border-gray-100'>Home</li>
+              <li className='p-4 text-2xl border-b border-gray-100'>Menu</li>
+              <li className='p-4 text-2xl border-b border-gray-100'>Location</li>
+              <li className='p-4 text-2xl border-b border-gray-100'>Contact</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
