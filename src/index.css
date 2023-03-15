@@ -16,3 +16,7 @@ html, body {
 .title-font{
   font-family: Lobster, Arial;
 }
+
+body{
+  background-color: #fff;
+}
