@@ -60,7 +60,7 @@ export const data = [
       type: "savoury",
       image: "https://imgs.search.brave.com/mKzbI4E5VG8cEKDkINRqNMC0IN0FAlIERbS7L4ve7Qs/rs:fit:1200:800:1/g:ce/aHR0cDovL2luc2lk/ZW5hbmFicmVhZHNo/ZWFkLmZpbGVzLndv/cmRwcmVzcy5jb20v/MjAxMy8wOS9iYnEt/Y2hpY2tlbi1waXp6/YS5qcGc",
       price: {
-        small: 9.99,
+        small: 9.99, 
         medium: 11.99,
         large: 13.99
       }
@@ -272,6 +272,6 @@ export const data = [
             small: 11.99,
             medium: 13.99,
             large: 15.99
-          }
+          },
         }
     ]

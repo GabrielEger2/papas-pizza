@@ -9,7 +9,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className='bg-papaslightred'>
+    <div className='bg-papaslightred fixed top-0 w-full z-50'>
       <div className='flex justify-between items-center h-20 max-w-[1200px] mx-auto px-6'>
         <h1 className='w-full text-4xl font-bold text-papasred title-font'>Papa's Pizza</h1>
         <ul className='md:flex hidden'>
