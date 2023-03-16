@@ -14,8 +14,8 @@ const Navbar = () => {
         <h1 className='w-full text-4xl font-bold text-papasred title-font'>Papa's Pizza</h1>
         <ul className='md:flex hidden'>
             <li className='px-4 py-2 text-2xl text-papasred'>Home</li>
+            <li className='px-4 py-2 text-2xl text-papasred'>About</li>
             <li className='px-4 py-2 text-2xl text-papasred'>Menu</li>
-            <li className='px-4 py-2 text-2xl text-papasred'>Location</li>
             <li>
                 <button className='bg-papasred text-papaswhite p-2 text-2xl rounded-lg'>Contact</button>
             </li>
@@ -34,8 +34,8 @@ const Navbar = () => {
             <h1 className='w-full text-4xl font-bold text-papasred m-4 title-font'>Papa's Pizza</h1>
             <ul className='text-papasred'>
               <li className='p-4 text-2xl border-b border-gray-100'>Home</li>
+              <li className='p-4 text-2xl border-b border-gray-100'>About</li>
               <li className='p-4 text-2xl border-b border-gray-100'>Menu</li>
-              <li className='p-4 text-2xl border-b border-gray-100'>Location</li>
               <li className='p-4 text-2xl border-b border-gray-100'>Contact</li>
             </ul>
           </div>
