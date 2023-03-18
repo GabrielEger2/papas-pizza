@@ -15,7 +15,8 @@ module.exports = {
       papaslightred: "#F1E8EA",
       papaswhite: "#fff",
       papasblack: "#181818",
-      gray900: "#212121"
+      gray900: "#212121",
+      papasivory: "#FFFFF0"
     },
   },
   plugins: [],

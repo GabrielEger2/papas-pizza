@@ -1,5 +1,4 @@
 import React from "react";
-import About from "./components/About";
 import Banner from "./components/Banner";
 import Carousel from "./components/Carousel";
 import Contact from "./components/Contact";
@@ -14,7 +13,6 @@ function App() {
       <Navbar />
       <Banner />
       <Carousel />
-      <About />
       <Menu />
       <Contact />
       <Footer />

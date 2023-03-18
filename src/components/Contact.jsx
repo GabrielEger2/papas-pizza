@@ -1,47 +1,48 @@
 import React from "react";
-import GoogleMapReact from 'google-map-react';
 import { MdOutlineBeenhere } from 'react-icons/md'
+import { compose, withProps } from "recompose"
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+const MyMapComponent = compose(
+  withProps({
+    googleMapURL: `https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_MAPS_API}`,
+    loadingElement: <div style={{ height: `100%` }} />,
+    containerElement: <div style={{ height: `100%` }} />,
+    mapElement: <div style={{ height: `100%` }} />,
+  }),
+  withScriptjs,
+  withGoogleMap
+)((props) =>
+  <GoogleMap
+    defaultZoom={19}
+    defaultCenter={{ lat: 40.856744, lng: -73.931606}}
+  >
+    {props.isMarkerShown && <Marker position={{ lat: 40.856829, lng: -73.931875 }} />}
+  </GoogleMap>
+)
+
+
 
 export default function Contact(){
-  const defaultProps = {
-    center: {
-      lat: 40.651070,
-      lng: -73.948751
-    },
-    zoom: 21
-  };
 
   return (
     <section id="contact">
         <div className="pt-4 p-4 max-w-[1640px] mx-auto">
         <div className="relative flex items-center" style={{ height: '80vh', width: '100%' }}>
-            <div className="absolute inset-0 z-10">
-            <GoogleMapReact
-                bootstrapURLKeys={{ key: "" }}
-                defaultCenter={defaultProps.center}
-                defaultZoom={defaultProps.zoom}
-            >
-                <AnyReactComponent
-                lat={40.650968}
-                lng={-73.949213}
-                >
-                <MdOutlineBeenhere size={30} />
-                </AnyReactComponent>
-            </GoogleMapReact>
+            <div className="absolute inset-0 z-10 hidden lg:block">
+            <MyMapComponent isMarkerShown />
             </div>
 
-            <div className="absolute top-20 left-20 mx-auto z-20 w-full max-w-sm space-x-3 bg-white bg-opacity-75">
-                <div className="w-full max-w-2xl px-1 py-2 m-auto bg-papaswhite rounded-lg shadow">
-                <div className="text-2xl font-bold text-center text-papasred">
+            <div className="lg:absolute lg:top-20 lg:left-20 justify-center mx-auto z-20 w-full max-w-sm space-x-3 bg-white bg-opacity-75">
+                <div className="w-full max-w-2xl px-1 py-2 m-auto bg-papasivory rounded-lg shadow">
+                <div className="text-2xl font-bold text-center text-papasred rounded-lg">
                 89-35 Fairview, NYC 
                 </div>
                 </div>
             </div>
 
-            <form className="absolute right-20 mx-auto z-20 w-full max-w-sm space-x-3 bg-white bg-opacity-75"> 
-            <div className="w-full max-w-2xl px-5 py-10 m-auto bg-papaswhite rounded-lg shadow">
+            <form className=" lg:absolute lg:right-20 right-0 justify-center mx-auto z-20 w-full max-w-sm space-x-3 bg-opacity-75"> 
+            <div className="w-full max-w-2xl px-5 py-10 m-auto bg-papasivory rounded-lg shadow-lg">
                 <div className="mb-6 text-5xl font-bold text-center text-papasred title-font">
                 Contact us !
                 </div>
