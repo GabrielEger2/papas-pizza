@@ -1,5 +1,4 @@
-import React, { useRef, useState } from "react";
-import { MdOutlineBeenhere } from 'react-icons/md'
+import React, { useState } from "react";
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 import emailjs from '@emailjs/browser';
@@ -44,7 +43,7 @@ export default function Contact(){
 
     emailjs.send(process.env.REACT_APP_SERVICE_ID, process.env.REACT_APP_TEMPLATE_ID, templateParams, process.env.REACT_APP_PUBLIC_KEY)
     .then((response) => {
-      console.log("email enviado", response.status, response.text)
+      console.log("email sent", response.status, response.text)
       setName('')
       setEmail('')
       setMessage('')
@@ -54,13 +53,13 @@ export default function Contact(){
 
   return (
     <section id="contact">
-        <div className="pt-4 p-4 max-w-[1640px] mx-auto">
-        <div className="relative flex items-center" style={{ height: '80vh', width: '100%' }}>
-            <div className="absolute inset-0 z-10 hidden lg:block">
+        <div className="pt-4 lg:pt-0 p-4 max-w-[1640px] mx-auto">
+        <div className="relative flex items-center flex-col lg:flex-row pb-6 lg:pb-0 lg:h-80v w-100v">
+            <div className="lg:absolute inset-0 z-10 hidden lg:block">
             <MyMapComponent isMarkerShown />
             </div>
 
-            <div className="lg:absolute lg:top-20 lg:left-20 justify-center mx-auto z-20 w-full max-w-sm space-x-3 bg-white bg-opacity-75">
+            <div className="lg:absolute lg:top-20 lg:left-20 justify-center mx-auto z-20 w-full max-w-sm space-x-3 bg-white bg-opacity-75 pb-6 lg:pb-0">
                 <div className="w-full max-w-2xl px-1 py-2 m-auto bg-papasivory rounded-lg shadow">
                 <div className="text-2xl font-bold text-center text-papasred rounded-lg">
                 89-35 Fairview, NYC 

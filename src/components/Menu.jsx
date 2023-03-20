@@ -52,9 +52,9 @@ const Menu = () => {
             {foods.map((item, index) => (
             <div key={index} className='border border-papasred shadow-lg bg-papaslightred hover:scale-105 duration-500 rounded-lg'>
                 <img src={item.image} alt={item.name} className='w-full h-[300px] object-cover rounded-t-lg' />
-                <div className='flex justify-between px-2 py-4'>
+                <div className='flex justify-between px-2 py-4 flex-col md:flex-row'>
                 <p className='font-bold text text-lg'>{item.name}</p>
-                <p>
+                <p className='pt-4 md:pt-0'>
                 <span className='bg-papasred font-bold text-papaswhite p-2 rounded-lg text-lg'>${item.price[activeSize]}</span>
                 </p>
                 </div>

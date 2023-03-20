@@ -45,7 +45,7 @@ const Navbar = () => {
           <li className="px-4 py-2 text-2xl text-papasred hover:underline">
             <a href="#menu">Menu</a>
           </li>
-          <li className="flex justify-center items-center">
+          <li className="flex justify-center items-center pl-4">
             <a href="#contact" className=" bg-papasred text-papaswhite px-4 py-2 text-2xl rounded-lg">
               Contact
             </a>
