@@ -17,9 +17,9 @@ This is a code repository for a mock website that I did for a fake pizzaria; ple
 ```
 
 
-<h3>Environment Nariables</h3>
+<h3>Environment Variables</h3>
 
-For security purposes, this project uses three variables exemplified in the .env.exemple file:
+For security purposes, this project uses four environment variables exemplified in the .env.example file:
 
 `REACT_APP_MAPS_API` = "GOOGLE MAPS API KEY"
 
