@@ -2,36 +2,36 @@ import React, { useState, useEffect } from 'react';
 import { MdOutlineRestaurantMenu, MdClose } from 'react-icons/md';
 
 const Navbar = () => {
-  const [nav, setNav] = useState(false);
+  const [nav, setNav] = useState(false);  // Setting up a state variable for the navigation menu
 
   const handleNav = () => {
-    setNav(!nav);
+    setNav(!nav);  // Toggling the value of the navigation menu state variable
   };
 
   useEffect(() => {
-    const handleLinkClick = (event) => {
+    const handleLinkClick = (event) => {  // Defining a function to handle click events on the navigation menu links
       event.preventDefault();
       const target = event.target.hash;
       const element = document.querySelector(target);
       if (element) {
         const topOffset = element.offsetTop;
-        window.scrollTo({
+        window.scrollTo({  // Scrolling the window to the target element
           top: topOffset,
           behavior: 'smooth',
         });
       }
     };
-    const links = document.querySelectorAll('a[href^="#"]');
+    const links = document.querySelectorAll('a[href^="#"]');  // Selecting all the navigation menu links with the href attribute starting with "#"
     links.forEach((link) => {
-      link.addEventListener('click', handleLinkClick);
+      link.addEventListener('click', handleLinkClick);  // Adding the event listener to each link
     });
     return () => {
       links.forEach((link) => {
-        link.removeEventListener('click', handleLinkClick);
+        link.removeEventListener('click', handleLinkClick);  // Removing the event listener from each link on component unmount
       });
     };
   }, []);
-
+  
   return (
     <div className="bg-papaslightred fixed top-0 w-full z-50">
       <div className="flex justify-between items-center h-20 max-w-[1200px] mx-auto px-6">

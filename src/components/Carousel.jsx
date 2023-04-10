@@ -2,18 +2,20 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { data } from '../data/PizzaData';
 
+// Get the last 10 elements from the data array and reverse them
 const lastSixElements = data.slice(-10).reverse();
 
+// Define the Carousel component
 const Carousel = () => {
+
+    // Set up state to store the width of the screen
     const [width, setWidth] = useState(0);
+
+    // Create a reference to the screen size element
     const screenSize = useRef();
 
-    useEffect(() => {
-        setWidth(screenSize.current.scrollWidth - screenSize.current.offsetWidth)
-    }, []);
-
   return (
-        <div className='w-full max-h-72 flex px-4'>
+    <div className='w-full max-h-72 flex px-4'>
         <div ref={screenSize} className='overflow-hidden flex max-h-72' style={{ margin: '0 5%' }}>
             <motion.div drag='x' dragConstraints={{ right: 0, left: -width }} className='flex gap-4 md:gap-8'>
             {lastSixElements.map((element) => {
@@ -27,7 +29,7 @@ const Carousel = () => {
             })}
             </motion.div>
         </div>
-        </div>
+    </div>
   );
 };
 

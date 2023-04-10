@@ -3,6 +3,8 @@ import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 import emailjs from '@emailjs/browser';
 
+
+  //Setting the google maps api parameters
 const MyMapComponent = compose(
   withProps({
     googleMapURL: `https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${process.env.REACT_APP_MAPS_API}`,
@@ -14,33 +16,37 @@ const MyMapComponent = compose(
   withGoogleMap
 )((props) =>
   <GoogleMap
-    defaultZoom={20}
+    defaultZoom={18}
     defaultCenter={{ lat: 40.856744, lng: -73.931606}}
   >
     {props.isMarkerShown && <Marker position={{ lat: 40.856829, lng: -73.931875 }} />}
   </GoogleMap>
 )
- 
+
 export default function Contact(){
 
+  // Setting up state variables
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
 
-  
+  // Function to send email
   function sendEmail(e) {
     e.preventDefault();
 
+    // Checking if all the required fields are filled
     if(name === '' || email === '' || message === ''){
       alert("Please fill up all the required fields")
     }
 
+    // Setting up the email parameters
     const templateParams ={
       from_name: name,
       message: message,
       email: email
     }
 
+    // Sending the email using emailjs
     emailjs.send(process.env.REACT_APP_SERVICE_ID, process.env.REACT_APP_TEMPLATE_ID, templateParams, process.env.REACT_APP_PUBLIC_KEY)
     .then((response) => {
       console.log("email sent", response.status, response.text)
@@ -51,9 +57,10 @@ export default function Contact(){
 
   }
 
+
   return (
     <section id="contact">
-        <div className="pt-4 lg:pt-0 p-4 max-w-[1640px] mx-auto">
+      <div className="pt-4 lg:pt-0 p-4 max-w-[1640px] mx-auto">
         <div className="relative flex items-center flex-col lg:flex-row pb-6 lg:pb-0 lg:h-80v w-100v">
             <div className="lg:absolute inset-0 z-10 hidden lg:block">
             <MyMapComponent isMarkerShown />
@@ -102,7 +109,7 @@ export default function Contact(){
                 </div>
             </form>
         </div>
-        </div>
+      </div>
     </section>
   );
 }
