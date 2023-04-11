@@ -8,12 +8,7 @@ This is a code repository for a mock website that I did for a fake pizzaria; ple
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In order to locally use this website, you must have react and install all the librarie's requirements using the following commands:</p> 
 
 ```bash
- npm install -D tailwindcss #or yarn add -D tailwindcss
- npm install dotenv #or yarn add dotenv
- npm install framer-motion #or yarn add framer-motion
- npm install react-google-maps #or yarn add react-google-maps
- npm install react-typed #or yarn add react-typed
- npm install @emailjs/browser #or yarn add @emailjs/browser
+ npm run build #or yarn run build
 ```
 
 
