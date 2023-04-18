@@ -13,6 +13,9 @@ const Carousel = () => {
 
     // Create a reference to the screen size element
     const screenSize = useRef();
+    useEffect(() => {
+        setWidth(screenSize.current.scrollWidth - screenSize.current.offsetWidth)
+    }, []);
 
   return (
     <div className='w-full max-h-72 flex px-4'>
@@ -21,7 +24,7 @@ const Carousel = () => {
             {lastSixElements.map((element) => {
                 return (
                 <motion.div key={element.id} className='w-52 md:w-60 p-2 bg-papaslightred rounded-lg cursor-grab overflow-hidden h-52 md:h-60'>
-                    <img className='h-28 md:h-40 object-cover rounded-xl pointer-events-none' src={element.image} alt='New pizza flavor image' />
+                    <img className='h-28 md:h-40 object-cover rounded-xl pointer-events-none' src={element.image} alt='New pizza flavor image'/>
                     <h1 className='p-1 text-base md:text-2xl text-center'>New Flavor:</h1>
                     <h1 className='text-center'>{element.name}</h1>
                 </motion.div>
