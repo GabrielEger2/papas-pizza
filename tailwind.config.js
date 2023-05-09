@@ -23,8 +23,8 @@ module.exports = {
 			},
     }, 
     colors: {
-      papasred: "#AD192A",
-      papaslightred: "#F1E8EA",
+      papasred: "#d01b30",
+      papaslightred: "#fae8ea",
       papaswhite: "#fff",
       papasblack: "#181818",
       gray900: "#212121",
