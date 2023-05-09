@@ -1,20 +1,15 @@
 import React from "react";
-import Banner from "./components/Banner";
-import Carousel from "./components/Carousel";
-import Contact from "./components/Contact";
+import { Outlet } from 'react-router-dom';
+
 import Footer from "./components/Footer";
-import Menu from "./components/Menu";
 import Navbar from "./components/Navbar";
 
 
 function App() {
   return (
     <div>
+      <Outlet />
       <Navbar />
-      <Banner />
-      <Carousel />
-      <Menu />
-      <Contact />
       <Footer />
     </div>
   );
