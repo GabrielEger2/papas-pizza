@@ -49,7 +49,7 @@ const Navbar = () => {
             <a href="#contact">Contact</a>
           </li>
           <li className="flex justify-center items-center pl-4">
-            <a href="#" className=" bg-papasred text-papaswhite px-4 py-2 text-2xl rounded-lg hover:px-6 hover:py-3 ease-in-out duration-500">
+            <a href="#" className=" bg-papasred text-papaswhite px-4 py-2 text-2xl rounded-lg hover:px-6 ease-in-out duration-500">
               Order
             </a>
           </li>

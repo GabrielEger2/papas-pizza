@@ -5,6 +5,8 @@ import pepperoniPizzaImg from '../assets/imgs/pizzabg.jpg';
 
 import Carousel from '../components/Carousel'
 import Contact from '../components/Contact';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const Home = () => {
     // Declare state variables using the useState hook
@@ -35,6 +37,7 @@ const Home = () => {
 
   return (
     <div>
+        <Navbar />
         <section id='home'>
             <div className=' pt-24 p-4 max-w-[1640px] mx-auto'>
                 <div className='max-h-[600px] relative'>
@@ -86,6 +89,7 @@ const Home = () => {
             </div>
         </section>
         <Contact />
+        <Footer />
     </div>
   )
 }

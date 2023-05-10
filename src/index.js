@@ -6,6 +6,7 @@ import { BrowserRouter, createBrowserRouter, RouterProvider } from "react-router
 // Import the components used in the router
 import App from "./App";
 import Home from "./routes/Home";
+import Order from "./routes/Order";
 
 // Import CSS file
 import "./index.css";
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
     element: <App />, // The App component is the top-level element for the root path
     children: [
       { path: "/", element: <Home /> }, // The Home component is displayed at the root path
+      { path: "/order", element: <Order /> }, // The Order component is displayed when the path matches "/order"
     ]
   },
 ]);
