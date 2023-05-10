@@ -21,15 +21,14 @@ module.exports = {
 				"90v": "90vh",
 				"100v": "100vh",
 			},
+      colors: {
+        papasred: "#d01b30",
+        papaslightred: "#fae8ea",
+        papaswhite: "#fff",
+        papasblack: "#181818",
+        papasivory: "#FFFFF0"
+      },
     }, 
-    colors: {
-      papasred: "#d01b30",
-      papaslightred: "#fae8ea",
-      papaswhite: "#fff",
-      papasblack: "#181818",
-      gray900: "#212121",
-      papasivory: "#FFFFF0"
-    },
   },
   plugins: [],
 }
