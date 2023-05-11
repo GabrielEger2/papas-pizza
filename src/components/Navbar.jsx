@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MdOutlineRestaurantMenu, MdClose } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);  // Setting up a state variable for the navigation menu
@@ -49,9 +50,9 @@ const Navbar = () => {
             <a href="#contact">Contact</a>
           </li>
           <li className="flex justify-center items-center pl-4">
-            <a href="#" className=" bg-papasred text-papaswhite px-4 py-2 text-2xl rounded-lg hover:px-6 ease-in-out duration-500">
+            <Link to="/order" className="bg-papasred text-papaswhite px-4 py-2 text-2xl rounded-lg hover:px-6 ease-in-out duration-500">
               Order
-            </a>
+            </Link>
           </li>
         </ul>
         <div className="text-papaswhite bg-papasred p-1 rounded-full block md:hidden cursor-pointer" onClick={handleNav}>
@@ -79,7 +80,7 @@ const Navbar = () => {
                 <a href="#contact">Contact</a>
               </li>
               <li className="p-4 text-2xl border-b border-papasred">
-                <a href="">Order</a>
+                <Link to="/order">Order</Link>
               </li>
             </ul>
           </div>
