@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { data } from '../data/PizzaData';
 
-const lastSixElements = data.slice(-10).reverse();
+const lastSixElements = data.slice(-12).reverse();
 
 const Carousel = () => {
     const constraintsRef = useRef();
@@ -14,7 +14,7 @@ const Carousel = () => {
                 <motion.div drag='x' dragConstraints={constraintsRef} className='flex gap-4 md:gap-8'>
                     {lastSixElements.map((element) => {
                         return (
-                            <motion.div key={element.id} className='w-40 md:w-60 p-2 bg-papaslightred rounded-lg cursor-grab overflow-hidden h-52 md:h-60'>
+                            <motion.div key={element.id} className='w-40 md:w-60 p-2 bg-gray-50 rounded-lg cursor-grab overflow-hidden h-52 md:h-60 border border-gray-200'>
                                 <img className='h-28 md:h-40 object-cover rounded-xl pointer-events-none' src={element.image} alt='New pizza flavor'/>
                                 <h1 className='p-1 text-base md:text-2xl text-center'>New Flavor:</h1>
                                 <h1 className='text-center'>{element.name}</h1>

@@ -146,7 +146,7 @@ export const data = [
         id: 14,
         name: "Garlic and Mushroom",
         type: "savoury",
-        image: "https://imgs.search.brave.com/LiyeFMPafpuQsoShrpvjajNyrMrYN_Xzo1Ms9kAknko/rs:fit:777:1000:1/g:ce/aHR0cDovL3d3dy5s/aWZlaXNidXRhZGlz/aC5jb20vd3AtY29u/dGVudC91cGxvYWRz/LzIwMTYvMDkvR2Fy/bGljLU11c2hyb29t/LVNwaW5hY2gtUGl6/emEuanBn",
+        image: "https://www.thespruceeats.com/thmb/gQOCQ3Ruyihg5l1I8ItLsNgdK3k=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-941066374-f243b94839bc4c85bb14bb2737f93122.jpg",
         price: {
           small: 8.99,
           medium: 10.99,

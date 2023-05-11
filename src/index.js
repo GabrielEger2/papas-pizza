@@ -7,6 +7,7 @@ import { BrowserRouter, createBrowserRouter, RouterProvider } from "react-router
 import App from "./App";
 import Home from "./routes/Home";
 import Order from "./routes/Order";
+import Page404 from "./routes/Page404";
 
 // Import CSS file
 import "./index.css";
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> }, // The Home component is displayed at the root path
       { path: "/order", element: <Order /> }, // The Order component is displayed when the path matches "/order"
+      { path: "*", element: <Page404 /> } // The PageNotFound component is displayed when no other routes match
     ]
   },
 ]);
