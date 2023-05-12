@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { data } from '../data/PizzaData'
 import ReactTyped from 'react-typed';
+import { Link } from 'react-router-dom';
+
 import pepperoniPizzaImg from '../assets/imgs/pizzabg.jpg';
 
 import Carousel from '../components/Carousel'
@@ -73,7 +75,7 @@ const Home = () => {
                 </div>
             </div>
 
-            <div className='grid grid-cols-2 lg:grid-cols-4 gap-6 pt-4'>
+            <Link to="/order" className='grid grid-cols-2 lg:grid-cols-4 gap-6 pt-4'>
                 {foods.map((item, index) => (
                 <div key={index} className='border border-papasred shadow-lg bg-papaslightred hover:scale-105 duration-500 rounded-lg'>
                     <img src={item.image} alt={item.name} className='w-full h-[300px] object-cover rounded-t-lg' />
@@ -85,7 +87,7 @@ const Home = () => {
                     </div>
                 </div>
                 ))}
-            </div>
+            </Link>
             </div>
         </section>
         <Contact />

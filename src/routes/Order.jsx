@@ -24,7 +24,7 @@ const Order = () => {
       if (element) {
         const topOffset = element.offsetTop;
         window.scrollTo({  // Scrolling the window to the target element
-          top: topOffset,
+          top: topOffset -60,
           behavior: 'smooth',
         });
       }
@@ -58,40 +58,40 @@ const Order = () => {
     };
   }, []);
 
-  const navbarClass = `z-50 flex justify-center ${
-    isScrolled ? 'bg-gray-50 fixed top-0 w-full z-30 shadow-lg pr-[450px]' : ''
+  const navbarClass = `z-30 flex justify-center ${
+    isScrolled ? 'bg-gray-50 fixed top-0 w-full z-30 shadow-lg md:pr-[450px]' : ''
   }`;
 
   return (
     <div>
-      <nav className="z-40 hidden md:block fixed inset-y-0 right-0 w-[450px] float-right bg-gray-50 border-l border-l-gray-300">
+      <nav className="z-40 hidden lg:block fixed inset-y-0 right-0 w-[450px] float-right bg-gray-50 border-l border-l-gray-300">
         <div className='px-20'>
           <h2 className='flex justify-center mt-16 text-5xl pb-2 font-bold border-b-2 border-b-black'>
             Your Order
           </h2>
-          <button className='flex justify-center w-full mt-12 text-2xl border-2 border-black rounded-md p-1 hover:text-3xl hover:p-2 ease-in-out duration-500'>
+          <button className='flex justify-center w-full mt-12 text-2xl border-2 border-black rounded-md p-1 hover:bg-gray-200 ease-in-out duration-500'>
             Delivery Location
           </button>
         </div>
-        <img className='z-50 items-center flex justify-center mt-40 translate-x-2' src={StonePizzaOven} alt="Stone Oven" />
+        <img className='z-50 items-center flex justify-center mt-16 2xl:mt-36 translate-x-2' src={StonePizzaOven} alt="Stone Oven" />
       </nav>
-      <main className="flex-1 pr-[450px]">
+      <main className="flex-1 pr-0 lg:pr-[450px]">
         <div className='absolute h-full w-full text-papaswhite max-h-60 bg-papasblack/70 flex flex-col justify-center'>
-            <Link to="/" className='pl-16 text-7xl title-font font-bold tracking-wide'>Papa's Pizza</Link>
+            <Link to="/" className='pl-16 text-5xl lg:text-6xl xl:text-7xl title-font font-bold tracking-wide'>Papa's Pizza</Link>
         </div>
         <img className='w-full max-h-60 object-cover' src={pepperoniPizzaImg} alt="Pepporini pizza" />
         <nav className={navbarClass}>
-            <ul className='px-20 pt-2 text-xl border-b border-b-papasligthred flex'>
-                <li className='px-6 hover:underline focus:underline pb-1 flex-row'>
-                  <a href="#deals">Deals and Discounts</a>
+            <ul className='md:px-20 pt-2 text-xl border-b border-b-papasligthred flex'>
+                <li className='px-3 md:px-6 hover:underline focus:underline pb-1 flex-row'>
+                  <a href="#deals">Discounts</a>
                 </li>
-                <li className='px-6 hover:underline focus:underline pb-1 flex-row'>
-                  <a href="#savoury">Savoury Pizza</a>
+                <li className='px-3 md:px-6 hover:underline focus:underline pb-1 flex-row'>
+                  <a href="#savoury">Savoury</a>
                 </li>
-                <li className='px-6 hover:underline focus:underline pb-1 flex-row'>
-                  <a href="#sweet">Sweet Pizza</a>
+                <li className='px-3 md:px-6 hover:underline focus:underline pb-1 flex-row'>
+                  <a href="#sweet">Sweet</a>
                 </li>
-                <li className='px-6 hover:underline focus:underline pb-1 flex-row'>
+                <li className='px-3 md:px-6 hover:underline focus:underline pb-1 flex-row'>
                   <a href="#soda">Soda</a>
                 </li>
             </ul>
@@ -99,16 +99,16 @@ const Order = () => {
         <div className='mt-10'>
         <Carousel />
         </div>
-        <div className='px-20 mt-10 mb-10'>
+        <div className='px-4 lg:pl-20 mt-10 mb-10'>
           <section id='deals' className='mb-10'>
             <h2 className='text-2xl font-bold'>
               Deals and Discounts:
             </h2>
-            <div className='flex pt-10 space-x-4'> 
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'>  
             <OrderBox
-              image="https://img.freepik.com/vetores-gratis/modelo-de-banner-de-vendas_1176-108.jpg?w=2000"
+              image="https://cdn-icons-png.flaticon.com/512/600/600219.png"
               title="Large Pepperoni Pizza"
-              description="Large Pepperoni Pizza with $3 dollars off"
+              description="Large Pepperoni Pizza for $10 dollars" 
               price="$10"
             />
             </div>
@@ -117,7 +117,7 @@ const Order = () => {
             <h2 className='text-2xl font-bold'>
               Savoury Pizza:
             </h2>
-            <div className='flex pt-10 space-x-4'> 
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'>
               <OrderBox
                 image="https://pastapizza.com.br/wp-content/uploads/2017/07/Pizza-Pizzaria-Forno-Forza-Express.jpg"
                 title="Small"
@@ -125,16 +125,16 @@ const Order = () => {
                 price="$10"
               />
               <OrderBox
-              image="https://pastapizza.com.br/wp-content/uploads/2017/07/Pizza-Pizzaria-Forno-Forza-Express.jpg"
-              title="Medium"
-              description="Medium Savoury Pizza"
-              price="$10"
+                image="https://pastapizza.com.br/wp-content/uploads/2017/07/Pizza-Pizzaria-Forno-Forza-Express.jpg"
+                title="Medium"
+                description="Medium Savoury Pizza"
+                price="$10"
               />
               <OrderBox
-              image="https://pastapizza.com.br/wp-content/uploads/2017/07/Pizza-Pizzaria-Forno-Forza-Express.jpg"
-              title="Large"
-              description="Large Savoury Pizza"
-              price="$10"
+                image="https://pastapizza.com.br/wp-content/uploads/2017/07/Pizza-Pizzaria-Forno-Forza-Express.jpg"
+                title="Large"
+                description="Large Savoury Pizza"
+                price="$10"
               />
             </div>
           </section>
@@ -142,21 +142,21 @@ const Order = () => {
             <h2 className='text-2xl font-bold'>
               Sweet Pizza:
             </h2>
-            <div className='flex pt-10 space-x-4'> 
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'> 
               <OrderBox
-              image="https://img.taste.com.au/FHsG8Xut/w643-h428-cfill-q90/taste/2016/11/nutty-choc-pizza-with-fresh-berries-92045-1.jpeg"
+              image="https://static.itdg.com.br/images/1200-630/ab93c09d82d7004b7c440fe5d3d734ad/131483-original.jpg"
               title="Small"
               description="Small Sweet Pizza"
               price="$10"
               />
               <OrderBox
-              image="https://img.taste.com.au/FHsG8Xut/w643-h428-cfill-q90/taste/2016/11/nutty-choc-pizza-with-fresh-berries-92045-1.jpeg"
+              image="https://static.itdg.com.br/images/1200-630/ab93c09d82d7004b7c440fe5d3d734ad/131483-original.jpg"
               title="Medium"
               description="Medium Sweet Pizza"
               price="$10"
               />
               <OrderBox
-              image="https://img.taste.com.au/FHsG8Xut/w643-h428-cfill-q90/taste/2016/11/nutty-choc-pizza-with-fresh-berries-92045-1.jpeg"
+              image="https://static.itdg.com.br/images/1200-630/ab93c09d82d7004b7c440fe5d3d734ad/131483-original.jpg"
               title="Large"
               description="Large Sweet Pizza"
               price="$10"
@@ -167,7 +167,7 @@ const Order = () => {
             <h2 className='text-2xl font-bold'>
               Soda:
             </h2>
-            <div className='flex pt-10 space-x-4'> 
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'>  
               <OrderBox
               image="https://logowik.com/content/uploads/images/coca-cola-red-circle1983.logowik.com.webp"
               title="1L"
