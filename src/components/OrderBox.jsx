@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
+import OrderCard from './OrderCard';
 
 const OrderBox = (props) => {
+
   return (
     <div>
+      <div>
         <a href="#" className="flex items-center bg-white border border-gray-200 rounded-lg flex-row max-w-xl hover:bg-gray-100 shadow-lg">
             <img className="object-cover h-36 w-32 rounded-t-lg md:rounded-none md:rounded-l-lg" src={props.image} alt=""/>
             <div className="flex flex-col justify-between p-4 leading-normal">
@@ -11,6 +14,7 @@ const OrderBox = (props) => {
                 <p className="mb-3 font-normal text-papasred">{props.price}</p>
             </div>
         </a>
+      </div>
     </div>
   )
 }

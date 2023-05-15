@@ -7,10 +7,12 @@ import Carousel from '../components/Carousel';
 import pepperoniPizzaImg from '../assets/imgs/pizzabg.jpg';
 import StonePizzaOven from '../assets/imgs/StonePizzaOver.png';
 import OrderBox from '../components/OrderBox';
+import OrderCard from '../components/OrderCard';
 
 const Order = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [nav, setNav] = useState(false);  // Setting up a state variable for the navigation menu
+  const [openOrderCard, setOpenOrderCard] = useState(false);
 
   const handleNav = () => {
     setNav(!nav);  // Toggling the value of the navigation menu state variable
@@ -64,6 +66,8 @@ const Order = () => {
 
   return (
     <div>
+      <OrderCard isOpen={openOrderCard} 
+      setCloseOrderCard={() => setOpenOrderCard(!openOrderCard)}/>
       <nav className="z-40 hidden lg:block fixed inset-y-0 right-0 w-[450px] float-right bg-gray-50 border-l border-l-gray-300">
         <div className='px-20'>
           <h2 className='flex justify-center mt-16 text-5xl pb-2 font-bold border-b-2 border-b-black'>
@@ -77,11 +81,11 @@ const Order = () => {
       </nav>
       <main className="flex-1 pr-0 lg:pr-[450px]">
         <div className='absolute h-full w-full text-papaswhite max-h-60 bg-papasblack/70 flex flex-col justify-center'>
-            <Link to="/" className='pl-16 text-5xl lg:text-6xl xl:text-7xl title-font font-bold tracking-wide'>Papa's Pizza</Link>
+            <Link to="/" className='pl-4 md:pl-8 lg:pl-12 xl:pl-16 text-5xl lg:text-6xl xl:text-7xl title-font font-bold tracking-wide'>Papa's Pizza</Link>
         </div>
         <img className='w-full max-h-60 object-cover' src={pepperoniPizzaImg} alt="Pepporini pizza" />
         <nav className={navbarClass}>
-            <ul className='md:px-20 pt-2 text-xl border-b border-b-papasligthred flex'>
+            <ul className='lg:px-20 pt-2 text-xl border-b border-b-papasligthred flex'>
                 <li className='px-3 md:px-6 hover:underline focus:underline pb-1 flex-row'>
                   <a href="#deals">Discounts</a>
                 </li>
@@ -104,7 +108,8 @@ const Order = () => {
             <h2 className='text-2xl font-bold'>
               Deals and Discounts:
             </h2>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'>  
+            <div onClick={() => setOpenOrderCard(true)} 
+            className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'>   
             <OrderBox
               image="https://cdn-icons-png.flaticon.com/512/600/600219.png"
               title="Large Pepperoni Pizza"
@@ -117,7 +122,8 @@ const Order = () => {
             <h2 className='text-2xl font-bold'>
               Savoury Pizza:
             </h2>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'>
+            <div onClick={() => setOpenOrderCard(true)} 
+            className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'> 
               <OrderBox
                 image="https://pastapizza.com.br/wp-content/uploads/2017/07/Pizza-Pizzaria-Forno-Forza-Express.jpg"
                 title="Small"
@@ -142,7 +148,8 @@ const Order = () => {
             <h2 className='text-2xl font-bold'>
               Sweet Pizza:
             </h2>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'> 
+            <div onClick={() => setOpenOrderCard(true)} 
+            className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'> 
               <OrderBox
               image="https://static.itdg.com.br/images/1200-630/ab93c09d82d7004b7c440fe5d3d734ad/131483-original.jpg"
               title="Small"
@@ -167,7 +174,8 @@ const Order = () => {
             <h2 className='text-2xl font-bold'>
               Soda:
             </h2>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'>  
+            <div onClick={() => setOpenOrderCard(true)} 
+            className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'>   
               <OrderBox
               image="https://logowik.com/content/uploads/images/coca-cola-red-circle1983.logowik.com.webp"
               title="1L"

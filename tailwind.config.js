@@ -22,11 +22,11 @@ module.exports = {
 				"100v": "100vh",
 			},
       colors: {
+        papasdarkred: "#a61626",
         papasred: "#d01b30",
         papaslightred: "#fae8ea",
         papaswhite: "#fff",
-        papasblack: "#181818",
-        papasivory: "#FFFFF0"
+        papasblack: "#181818"
       },
     }, 
   },
