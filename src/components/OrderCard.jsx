@@ -1,22 +1,34 @@
-export default function OrderCard({ isOpen, setCloseOrderCard }) {
+import { data } from "../data/PizzaData";
+
+export default function OrderCard({ isOpen, setCloseOrderCard, type, size }) {
+    let sliceNumber;
+    
+    if (size === "small") {
+        sliceNumber = 2;
+    } else if (size === "medium") {
+        sliceNumber = 3;
+    } else if (size === "large") {
+        sliceNumber = 4;
+    }
+    
     if (isOpen) {
       return (
-        <div class="fixed justify-center flex z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-            <div class="relative w-full max-w-4xl max-h-full">
-                <div class="relative bg-white rounded-lg shadow">
-                    <div class="flex items-center justify-between p-5 border-b rounded-t">
-                        <h3 class="text-xl font-medium">
+        <div className="fixed justify-center flex z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div className="relative w-full max-w-4xl max-h-full">
+                <div className="relative bg-gray-50 rounded-lg shadow">
+                    <div className="flex items-center justify-between p-5 border-b rounded-t">
+                        <h3 className="text-2xl font-medium">
                             Currently Order:
                         </h3>
                         <button
                             onClick={setCloseOrderCard}
                             type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+                            className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
                             data-modal-hide="large-modal"
                             >
                             <svg
                                 aria-hidden="true"
-                                class="w-5 h-5"
+                                className="w-6 h-6"
                                 fill="currentColor"
                                 viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -27,10 +39,15 @@ export default function OrderCard({ isOpen, setCloseOrderCard }) {
                                 clip-rule="evenodd"
                                 ></path>
                             </svg>
-                            <span class="sr-only">Close modal</span>
+                            <span className="sr-only">Close modal</span>
                         </button>
                     </div>
-                    <div class="flex justify-center p-6 border-t border-gray-200 rounded-b">
+                    <div className="p-6 space-y-6">
+                        <p className="text-gray-700 text-xl ">
+                            select up to {sliceNumber} flavours:
+                        </p>
+                    </div>
+                    <div className="flex justify-center p-6 border-t border-gray-200 rounded-b">
                         <button className="py-2 px-4 text-2xl rounded-lg bg-papasred text-papaswhite">Add</button>
                     </div>
                 </div>

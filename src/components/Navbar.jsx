@@ -32,6 +32,20 @@ const Navbar = () => {
       });
     };
   }, []);
+
+  function ScrollLink({ to, children }) {
+    // An event handler that scrolls the page to the top when the link is clicked
+    const handleClick = () => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    };
+  
+    // The Link component that will be rendered
+    return (
+      <Link to={to} onClick={handleClick}>
+        {children}
+      </Link>
+    );
+  }
   
   return (
     <div className="bg-gray-50 fixed top-0 w-full z-50 shadow-lg">
@@ -50,9 +64,11 @@ const Navbar = () => {
             <a href="#contact">Contact</a>
           </li>
           <li className="flex justify-center items-center pl-4">
-            <Link to="/order" className="bg-papasred text-papaswhite px-4 py-2 text-2xl rounded-lg hover:px-6 ease-in-out duration-500">
-              Order
-            </Link>
+            <div className="bg-papasred text-papaswhite px-4 py-2 text-2xl rounded-lg hover:px-6 ease-in-out duration-500">
+              <ScrollLink  to="/order">
+                Order
+              </ScrollLink>
+            </div>
           </li>
         </ul>
         <div className="text-papaswhite bg-papasred p-1 rounded-full block md:hidden cursor-pointer" onClick={handleNav}>
@@ -80,7 +96,7 @@ const Navbar = () => {
                 <a href="#contact">Contact</a>
               </li>
               <li className="p-4 text-2xl border-b border-papasred">
-                <Link to="/order">Order</Link>
+                <ScrollLink  to="/order">Order</ScrollLink >
               </li>
             </ul>
           </div>

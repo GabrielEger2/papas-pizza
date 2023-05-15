@@ -12,7 +12,6 @@ import OrderCard from '../components/OrderCard';
 const Order = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [nav, setNav] = useState(false);  // Setting up a state variable for the navigation menu
-  const [openOrderCard, setOpenOrderCard] = useState(false);
 
   const handleNav = () => {
     setNav(!nav);  // Toggling the value of the navigation menu state variable
@@ -66,8 +65,6 @@ const Order = () => {
 
   return (
     <div>
-      <OrderCard isOpen={openOrderCard} 
-      setCloseOrderCard={() => setOpenOrderCard(!openOrderCard)}/>
       <nav className="z-40 hidden lg:block fixed inset-y-0 right-0 w-[450px] float-right bg-gray-50 border-l border-l-gray-300">
         <div className='px-20'>
           <h2 className='flex justify-center mt-16 text-5xl pb-2 font-bold border-b-2 border-b-black'>
@@ -108,13 +105,13 @@ const Order = () => {
             <h2 className='text-2xl font-bold'>
               Deals and Discounts:
             </h2>
-            <div onClick={() => setOpenOrderCard(true)} 
-            className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'>   
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'>   
             <OrderBox
               image="https://cdn-icons-png.flaticon.com/512/600/600219.png"
               title="Large Pepperoni Pizza"
               description="Large Pepperoni Pizza for $10 dollars" 
               price="$10"
+              type="promotion"
             />
             </div>
           </section>
@@ -122,25 +119,30 @@ const Order = () => {
             <h2 className='text-2xl font-bold'>
               Savoury Pizza:
             </h2>
-            <div onClick={() => setOpenOrderCard(true)} 
-            className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'> 
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'> 
               <OrderBox
                 image="https://pastapizza.com.br/wp-content/uploads/2017/07/Pizza-Pizzaria-Forno-Forza-Express.jpg"
                 title="Small"
                 description="Small Savoury Pizza"
-                price="$10"
+                price="$7.99 - $12.99"
+                type="savoury"
+                size="small"
               />
               <OrderBox
                 image="https://pastapizza.com.br/wp-content/uploads/2017/07/Pizza-Pizzaria-Forno-Forza-Express.jpg"
                 title="Medium"
                 description="Medium Savoury Pizza"
-                price="$10"
+                price="$9.99 - $14.99"
+                type="savoury"
+                size="medium"
               />
               <OrderBox
                 image="https://pastapizza.com.br/wp-content/uploads/2017/07/Pizza-Pizzaria-Forno-Forza-Express.jpg"
                 title="Large"
                 description="Large Savoury Pizza"
-                price="$10"
+                price="$11.99 - $16.99"
+                type="savoury"
+                size="large"
               />
             </div>
           </section>
@@ -148,25 +150,30 @@ const Order = () => {
             <h2 className='text-2xl font-bold'>
               Sweet Pizza:
             </h2>
-            <div onClick={() => setOpenOrderCard(true)} 
-            className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'> 
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'> 
               <OrderBox
               image="https://static.itdg.com.br/images/1200-630/ab93c09d82d7004b7c440fe5d3d734ad/131483-original.jpg"
               title="Small"
               description="Small Sweet Pizza"
-              price="$10"
+              price="$7.99 - $9.99"
+              type="sweet"
+              size="small"
               />
               <OrderBox
               image="https://static.itdg.com.br/images/1200-630/ab93c09d82d7004b7c440fe5d3d734ad/131483-original.jpg"
               title="Medium"
               description="Medium Sweet Pizza"
-              price="$10"
+              price="$9.99 - $11.99"
+              type="sweet"
+              size="medium"
               />
               <OrderBox
               image="https://static.itdg.com.br/images/1200-630/ab93c09d82d7004b7c440fe5d3d734ad/131483-original.jpg"
               title="Large"
               description="Large Sweet Pizza"
-              price="$10"
+              price="$11.99 - $13.99"
+              type="sweet"
+              size="large"
               />
             </div>
           </section>
@@ -174,19 +181,22 @@ const Order = () => {
             <h2 className='text-2xl font-bold'>
               Soda:
             </h2>
-            <div onClick={() => setOpenOrderCard(true)} 
-            className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'>   
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'>   
               <OrderBox
               image="https://logowik.com/content/uploads/images/coca-cola-red-circle1983.logowik.com.webp"
               title="1L"
               description="1 Litre Soda"
               price="$1.5"
+              type="soda"
+              size="1l"
               />
               <OrderBox
               image="https://logowik.com/content/uploads/images/coca-cola-red-circle1983.logowik.com.webp"
               title="2L"
               description="2 Litre Soda"
               price="$2.5"
+              type="soda"
+              size="2l"
               />
             </div>
           </section>

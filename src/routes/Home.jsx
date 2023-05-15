@@ -37,6 +37,20 @@ const Home = () => {
     const buttonClass = 'm-1 bg-transparent hover:bg-papasred text-papasblack font-semibold hover:text-papaswhite py-2 px-4 border border-papasred hover:border-transparent rounded';
     const activeButtonClass = 'm-1 bg-papasred text-papaswhite font-semibold py-2 px-4 border border-papasred rounded';
 
+    function ScrollLink({ to, children }) {
+    // An event handler that scrolls the page to the top when the link is clicked
+    const handleClick = () => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    };
+  
+    // The Link component that will be rendered
+    return (
+      <Link to={to} onClick={handleClick} className='grid grid-cols-2 lg:grid-cols-4 gap-6 pt-4'>
+        {children}
+      </Link>
+    );
+  }
+
   return (
     <div>
         <Navbar />
@@ -48,7 +62,7 @@ const Home = () => {
                     <h1 className='px-8 text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold'>You've come to</h1>
                     <h1 className='px-8 text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold'>&nbsp;&nbsp;the right <span className='text-papasred title-font'>Place!</span></h1>
                 </div>
-                <img className='w-full max-h-[600px] object-cover' src={pepperoniPizzaImg} alt="Image of a pepporini pizza" />
+                <img className='w-full max-h-[600px] object-cover' src={pepperoniPizzaImg} alt="pepporini pizza" />
                 </div>
             </div>
         </section>
@@ -75,7 +89,7 @@ const Home = () => {
                 </div>
             </div>
 
-            <Link to="/order" className='grid grid-cols-2 lg:grid-cols-4 gap-6 pt-4'>
+            <ScrollLink to="/order">
                 {foods.map((item, index) => (
                 <div key={index} className='border border-papasred shadow-lg bg-papaslightred hover:scale-105 duration-500 rounded-lg'>
                     <img src={item.image} alt={item.name} className='w-full h-[300px] object-cover rounded-t-lg' />
@@ -87,7 +101,7 @@ const Home = () => {
                     </div>
                 </div>
                 ))}
-            </Link>
+            </ScrollLink>
             </div>
         </section>
         <Contact />

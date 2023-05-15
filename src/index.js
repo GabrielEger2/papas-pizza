@@ -1,7 +1,7 @@
 // Import React and related modules
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Import the components used in the router
 import App from "./App";
