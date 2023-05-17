@@ -185,17 +185,17 @@ const Order = () => {
               image="https://logowik.com/content/uploads/images/coca-cola-red-circle1983.logowik.com.webp"
               title="1L"
               description="1 Litre Soda"
-              price="$1.5"
+              price="$3.99 - $5.99"
               type="soda"
-              size="1l"
+              size="1L"
               />
               <OrderBox
               image="https://logowik.com/content/uploads/images/coca-cola-red-circle1983.logowik.com.webp"
               title="2L"
               description="2 Litre Soda"
-              price="$2.5"
+              price="$6.99 - $8.99"
               type="soda"
-              size="2l"
+              size="2L"
               />
             </div>
           </section>
