@@ -7,7 +7,6 @@ import Carousel from '../components/Carousel';
 import pepperoniPizzaImg from '../assets/imgs/pizzabg.jpg';
 import StonePizzaOven from '../assets/imgs/StonePizzaOver.png';
 import OrderBox from '../components/OrderBox';
-import OrderCard from '../components/OrderCard';
 
 const Order = () => {
   const [isScrolled, setIsScrolled] = useState(false);
