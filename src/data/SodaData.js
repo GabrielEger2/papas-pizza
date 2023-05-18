@@ -11,7 +11,7 @@ export const sodaData = [
     {
       id: 2,
       name: "Diet Coke",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT27qzhuzGdDiDYqsPECTKag0bzEsiNDxLqag&usqp=CAU",
+      image: "https://media-cldnry.s-nbcnews.com/image/upload/newscms/2020_09/1543059/coke-corona-virus-today-main-200226-v2.jpg",
       price: {
         "1L": 3.99,
         "2L": 6.99

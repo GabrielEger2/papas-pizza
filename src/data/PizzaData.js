@@ -8,7 +8,8 @@ export const data = [
         small: 8.99,
         medium: 10.99,
         large: 12.99
-      }
+      },
+      deal: "classic"
     },
     {
       id: 2,
@@ -19,7 +20,8 @@ export const data = [
         small: 7.99,
         medium: 9.99,
         large: 11.99
-      }
+      },
+      deal: "classic"
     },
     {
       id: 3,
@@ -52,7 +54,8 @@ export const data = [
         small: 8.99,
         medium: 10.99,
         large: 12.99
-      }
+      },
+      deal: "classic"
     },
     {
       id: 6,
@@ -96,7 +99,8 @@ export const data = [
         small: 8.99,
         medium: 10.99,
         large: 12.99
-      }
+      },
+      deal: "classic"
     },
     {
       id: 10,
@@ -107,7 +111,8 @@ export const data = [
         small: 9.99,
         medium: 11.99,
         large: 13.99
-      }
+      },
+      deal: "classic"
     },
     {
         id: 11,
@@ -162,7 +167,8 @@ export const data = [
           small: 8.99,
           medium: 10.99,
           large: 12.99
-        }
+        },
+        deal: "classic"
       },
       {
         id: 16,

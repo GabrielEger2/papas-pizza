@@ -2,7 +2,7 @@ import { data } from "../data/PizzaData";
 import { sodaData } from "../data/SodaData";
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 
-export default function OrderCard({ isOpen, setCloseOrderCard, type, size }) {
+export default function OrderCard({ isOpen, setCloseOrderCard, type, size, deal }) {
   let sliceNumber;
 
   if (size === "small") {
@@ -20,6 +20,21 @@ export default function OrderCard({ isOpen, setCloseOrderCard, type, size }) {
     );
     const filteredSodaData = sodaData.filter(
       (soda) => soda.price[size] !== undefined
+    );
+    const filteredDealData = data.filter(
+      (pizza) => pizza.deal === deal && deal !== undefined
+    );
+
+    const textArea = (
+      <div>
+        <h2 className="mx-6 mb-4 text-2xl font-bold">NOTES FOR THE KITCHEN: </h2>
+          <div className=" justify-center mx-6">
+            <textarea 
+            className="block px-4 py-2 w-full max-w-4xl text-lg text-gray-900 bg-gray-100 rounded-lg border border-gray-300 focus:ring-papasred focus:border-papasred h-28 mb-20" 
+            placeholder="Ex: Remove onion, mayonnaise on the top, etc...">
+            </textarea>
+          </div>
+      </div>
     );
 
     const pizzas = (
@@ -43,20 +58,14 @@ export default function OrderCard({ isOpen, setCloseOrderCard, type, size }) {
             </div>
           ))}
         </div>
-        <h2 className="mx-6 mb-4 text-2xl font-bold">NOTES FOR THE KITCHEN: </h2>
-        <div className=" justify-center mx-6">
-          <textarea 
-          className="block px-4 py-2 w-full max-w-4xl text-lg text-gray-900 bg-gray-100 rounded-lg border border-gray-300 focus:ring-papasred focus:border-papasred h-28 mb-20" 
-          placeholder="Ex: Remove onion, mayonnaise on the top, etc...">
-          </textarea>
-        </div>
+        {textArea}
       </div>
     );
 
     const sodas = (
-      <div className="mt-20 justify-center">
+      <div className="mt-16 pt-2 justify-center">
         {filteredSodaData.map((soda) => (
-          <div className="items-center mx-2 sm:mx-6 sm:gap-4 md:gap-8 mb-8 flex bg-gray-100 border border-gray-300 rounded-lg" key={soda.name}>
+          <div className="items-center mx-2 sm:mx-6 sm:gap-4 md:gap-8 mb-4 flex bg-gray-100 border border-gray-300 rounded-lg" key={soda.name}>
             <img
               className="object-cover h-28 w-28 md:w-40 rounded-none rounded-l-lg"
               src={soda.image}
@@ -78,13 +87,34 @@ export default function OrderCard({ isOpen, setCloseOrderCard, type, size }) {
             </div>
           </div>
         ))}
-        <h2 className="mx-6 mb-4 text-2xl font-bold">NOTES FOR THE KITCHEN: </h2>
-        <div className="justify-center mx-6">
-          <textarea
-            className="block px-4 py-2 w-full max-w-4xl text-lg text-gray-900 bg-gray-100 rounded-lg border border-gray-300 focus:ring-papasred focus:border-papasred h-28 mb-20"
-            placeholder="Ex: Remove onion, mayonnaise on the top, etc..."
-          ></textarea>
+        <div className="mt-8">
+          {textArea}
         </div>
+      </div>
+    );
+
+    const deals = (
+      <div className="mt-16 pt-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-8 mb-8">
+          {filteredDealData.map((pizza) => (
+            <div key={pizza.id}>
+              <div className="bg-gray-100 border border-gray-300 rounded-lg">
+                <img className="h-40 w-full object-cover rounded-lg" src={pizza.image} alt={pizza.name} />
+                <div className="px-4 py-2">
+                  <h3 className="text-xl font-medium">{pizza.name}</h3>
+                  <div className="text-xl flex justify-between">
+                    <p className="text-papasred mt-1">$10</p>
+                    <div className="items-center flex justify-between space-x-4 p-2 cursor-pointer bg-papasred text-papaswhite rounded-full">
+                      <AiOutlinePlus size={20} />
+                      <AiOutlineMinus size={20} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        {textArea}
       </div>
     );
 
@@ -132,6 +162,11 @@ export default function OrderCard({ isOpen, setCloseOrderCard, type, size }) {
                 {type === "soda" ? (
                 <div>
                   {sodas}
+                </div>
+                ) : null}
+                {type === "deal" ? (
+                <div>
+                  {deals}
                 </div>
                 ) : null}
                 </div>

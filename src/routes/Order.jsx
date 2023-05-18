@@ -7,10 +7,12 @@ import Carousel from '../components/Carousel';
 import pepperoniPizzaImg from '../assets/imgs/pizzabg.jpg';
 import StonePizzaOven from '../assets/imgs/StonePizzaOver.png';
 import OrderBox from '../components/OrderBox';
+import DeliveryModal from '../components/DeliveryModal';
 
 const Order = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [nav, setNav] = useState(false);  // Setting up a state variable for the navigation menu
+  const [openModal, setOpenModal] = useState(false);
 
   const handleNav = () => {
     setNav(!nav);  // Toggling the value of the navigation menu state variable
@@ -64,12 +66,13 @@ const Order = () => {
 
   return (
     <div>
-      <nav className="z-40 hidden lg:block fixed inset-y-0 right-0 w-[450px] float-right bg-gray-50 border-l border-l-gray-300">
+      <DeliveryModal isOpen={openModal} setCloseModal={() => setOpenModal(!DeliveryModal)} />
+      <nav className="z-30 hidden lg:block fixed inset-y-0 right-0 w-[450px] float-right bg-gray-50 border-l border-l-gray-300">
         <div className='px-20'>
           <h2 className='flex justify-center mt-16 text-5xl pb-2 font-bold border-b-2 border-b-black'>
             Your Order
           </h2>
-          <button className='flex justify-center w-full mt-12 text-2xl border-2 border-black rounded-md p-1 hover:bg-gray-200 ease-in-out duration-500'>
+          <button onClick={() => setOpenModal(true)} className='flex justify-center w-full mt-12 text-2xl border-2 border-black rounded-md p-1 hover:bg-gray-200 ease-in-out duration-500'>
             Delivery Location
           </button>
         </div>
@@ -107,10 +110,10 @@ const Order = () => {
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4 pt-10'>   
             <OrderBox
               image="https://cdn-icons-png.flaticon.com/512/600/600219.png"
-              title="Large Pepperoni Pizza"
-              description="Large Pepperoni Pizza for $10 dollars" 
-              price="$10"
-              type="promotion"
+              title="Large Classic Pizza"
+              description="Large Classic Pizzas for $10 dollars" 
+              type="deal"
+              deal="classic"
             />
             </div>
           </section>
