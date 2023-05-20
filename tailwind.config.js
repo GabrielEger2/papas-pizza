@@ -24,6 +24,7 @@ module.exports = {
       colors: {
         papasdarkred: "#a61626",
         papasred: "#d01b30",
+        papasred400: "#cc858e",
         papaslightred: "#fae8ea",
         papaswhite: "#fff",
         papasblack: "#181818"

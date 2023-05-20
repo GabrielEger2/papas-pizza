@@ -218,7 +218,7 @@ export const data = [
         id: 20,
         name: "Sweet Potato and Kale",
         type: "savoury",
-        image: "https://imgs.search.brave.com/O5Rii_YqfL_wOTUhiLmW32J2F5qAbegDKN32Rqf-cNM/rs:fit:1200:630:1/g:ce/aHR0cDovLzEuYnAu/YmxvZ3Nwb3QuY29t/Ly1zYTh6RlUyTGhZ/RS9VQVRLTXo0U3J4/SS9BQUFBQUFBQUFR/by9vWUE3V0hycjg4/QS93MTIwMC1oNjMw/LXAtay1uby1udS8y/MDEyMDcxNV8yX0pE/SC0xLTIuanBn",
+        image: "https://3.bp.blogspot.com/-9x84C0bxW_c/T8WWlLdeOFI/AAAAAAAAAag/kzcPRO19yUQ/s1600/DSC00345.JPG",
         price: {
           small: 10.99,
           medium: 12.99,

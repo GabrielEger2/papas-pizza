@@ -45,3 +45,10 @@ body{
   background-color: #d01b30;
   border-radius: 40px;
 }
+
+.select-none {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

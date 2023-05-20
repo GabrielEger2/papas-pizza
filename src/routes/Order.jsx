@@ -60,8 +60,8 @@ const Order = () => {
     };
   }, []);
 
-  const navbarClass = `z-30 flex justify-center ${
-    isScrolled ? 'bg-gray-50 fixed top-0 w-full z-30 shadow-lg md:pr-[450px]' : ''
+  const navbarClass = `z-20 flex justify-center ${
+    isScrolled ? 'bg-gray-50 fixed top-0 w-full z-20 shadow-lg md:pr-[450px]' : ''
   }`;
 
   return (
@@ -75,8 +75,13 @@ const Order = () => {
           <button onClick={() => setOpenModal(true)} className='flex justify-center w-full mt-12 text-2xl border-2 border-black rounded-md p-1 hover:bg-gray-200 ease-in-out duration-500'>
             Delivery Location
           </button>
+          <div className='fixed bottom-0 right-0 z-50 w-[450px] justify-center flex mb-6'>
+            <button className='px-4 py-4 text-2xl font-bold rounded-xl text-papaswhite bg-papasred hover:bg-papasdarkred ease-in-out duration-500'>
+              Order $0.00
+            </button>
+          </div>
         </div>
-        <img className='z-50 items-center flex justify-center mt-16 2xl:mt-36 translate-x-2' src={StonePizzaOven} alt="Stone Oven" />
+        <img className='z-40 absolute mt-16 2xl:mt-36 translate-x-2' src={StonePizzaOven} alt="Stone Oven" />
       </nav>
       <main className="flex-1 pr-0 lg:pr-[450px]">
         <div className='absolute h-full w-full text-papaswhite max-h-60 bg-papasblack/70 flex flex-col justify-center'>
