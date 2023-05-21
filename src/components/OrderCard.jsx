@@ -6,9 +6,13 @@ import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 export default function OrderCard({ isOpen, setCloseOrderCard, type, size, deal }) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [selectedPizzas, setSelectedPizzas] = useState([]);
+  const [selectedSodas, setSelectedSodas] = useState([]);
+  const [selectedDeals, setSelectedDeals] = useState([]);
   const [numberOfProducts, setNumberOfProducts] = useState(0);
   const [notes, setNotes] = useState(""); // State variable to store the text area value
   const [pizzaCounts, setPizzaCounts] = useState({});
+  const [sodaCounts, setSodaCounts] = useState({});
+  const [dealCounts, setDealCounts] = useState({});
 
   
   let sliceNumber;
@@ -22,17 +26,20 @@ export default function OrderCard({ isOpen, setCloseOrderCard, type, size, deal 
   }
 
   const handleAddToOrder = () => {
-    // Save the order information to an array or do any other processing
     console.log('Total Price:', totalPrice);
     console.log('Selected Pizzas:', selectedPizzas);
+    console.log('Selected Sodas:', selectedSodas);
     console.log('Number of Products:', numberOfProducts);
-    console.log('Notes:', notes); // Access the text area value through the "notes" state variable
+    console.log('Notes:', notes);
 
-    // Reset the state values and close the modal
     setTotalPrice(0);
     setSelectedPizzas([]);
+    setSelectedSodas([]);
     setNumberOfProducts(0);
-    setNotes(""); // Reset the text area value
+    setNotes("");
+    setPizzaCounts({}); // Reset the pizzaCounts state
+    setSodaCounts({}); // Reset the pizzaCounts state
+
     setCloseOrderCard();
   };
 
@@ -98,7 +105,7 @@ export default function OrderCard({ isOpen, setCloseOrderCard, type, size, deal 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-8 mb-8">
           {filteredData.map((pizza) => (
             <div key={pizza.id}>
-              <div className="bg-gray-100 border border-gray-300 rounded-lg select-none">
+              <div className="bg-gray-100 border border-gray-300 rounded-lg">
                 <img className="h-40 w-full object-cover rounded-lg" src={pizza.image} alt={pizza.name} />
                 <div className="px-4 py-2">
                   <h3 className="text-xl font-medium">{pizza.name}</h3>
@@ -134,6 +141,35 @@ export default function OrderCard({ isOpen, setCloseOrderCard, type, size, deal 
       </div>
     );
 
+    const handleSodaSelection = (soda) => {
+      const price = soda.price[size];
+      setTotalPrice((prevTotal) => prevTotal + price);
+      setSelectedSodas((prevSodas) => [...prevSodas, soda.name]);
+      setNumberOfProducts((prevProducts) => prevProducts + 1);
+
+      setSodaCounts((prevCounts) => ({
+        ...prevCounts,
+        [soda.id]: (prevCounts[soda.id] || 0) + 1,
+      }));
+    };
+
+    const handleSodaDeselection = (soda) => {
+      const price = soda.price[size]
+      setTotalPrice((prevTotal) => prevTotal - price);
+      const index = selectedSodas.indexOf(soda.name);
+      if (index !== -1) {
+        const updatedSodas = [...selectedSodas];
+        updatedSodas.splice(index, 1);
+        setSelectedSodas(updatedSodas);
+      }
+      setNumberOfProducts((prevProducts) => prevProducts - 1);
+      
+      setSodaCounts((prevCounts) => ({
+        ...prevCounts,
+        [soda.id]: Math.max((prevCounts[soda.id] || 0) - 1, 0),
+      }));
+    };
+
     const sodas = (
       <div className="mt-16 pt-2 justify-center">
         {filteredSodaData.map((soda) => (
@@ -152,8 +188,20 @@ export default function OrderCard({ isOpen, setCloseOrderCard, type, size, deal 
                 <p className="text-lg font-normal text-papasred">${soda.price[size]}</p>
               </div>
               <div className="items-center flex justify-between space-x-6 cursor-pointer text-papasred rounded-full">
-                <AiOutlinePlus size={22} />
-                <AiOutlineMinus size={22} />
+                  <AiOutlinePlus
+                  size={36}
+                  onClick={() => handleSodaSelection(soda)}
+                  className= "select-none text-papasred"
+                  />
+                  {sodaCounts[soda.id] > 0 ? (
+                  <AiOutlineMinus
+                  size={36}
+                  onClick={() => handleSodaDeselection(soda)}
+                  className='select-none text-papasred'
+                  />
+                  ) : (
+                  <AiOutlineMinus size={36} className='select-none text-papasred400 cursor-not-allowed' />
+                  )}
               </div>
             </div>
           </div>
@@ -161,21 +209,60 @@ export default function OrderCard({ isOpen, setCloseOrderCard, type, size, deal 
         <div className="mt-8">{textArea}</div>
       </div>
     );
+    
+    const handleDealsSelection = (deal) => {
+      setTotalPrice((prevTotal) => prevTotal + 10);
+      setSelectedDeals((prevDeals) => [...prevDeals, deal.name]);
+      setNumberOfProducts((prevProducts) => prevProducts + 1);
+    
+      setDealCounts((prevCounts) => ({
+        ...prevCounts,
+        [deal.id]: (prevCounts[deal.id] || 0) + 1,
+      }));
+    };
+
+    const handleDealsDeselection = (deal) => {
+      setTotalPrice((prevTotal) => prevTotal - 10);
+      const index = selectedDeals.indexOf(deal.name);
+      if (index !== -1) {
+        const updatedDeals = [...selectedDeals];
+        updatedDeals.splice(index, 1);
+        setSelectedDeals(updatedDeals);
+      }
+      setNumberOfProducts((prevProducts) => prevProducts - 1);
+      
+      setDealCounts((prevCounts) => ({
+        ...prevCounts,
+        [deal.id]: Math.max((prevCounts[deal.id] || 0) - 1, 0),
+      }));
+    };
 
     const deals = (
       <div className="mt-16 pt-2">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-8 mb-8">
-          {filteredDealData.map((pizza) => (
-            <div key={pizza.id}>
+          {filteredDealData.map((deal) => (
+            <div key={deal.id}>
               <div className="bg-gray-100 border border-gray-300 rounded-lg">
-                <img className="h-40 w-full object-cover rounded-lg" src={pizza.image} alt={pizza.name} />
+                <img className="h-40 w-full object-cover rounded-lg" src={deal.image} alt={deal.name} />
                 <div className="px-4 py-2">
-                  <h3 className="text-xl font-medium">{pizza.name}</h3>
+                  <h3 className="text-xl font-medium">{deal.name}</h3>
                   <div className="text-xl flex justify-between">
                     <p className="text-papasred mt-1">$10</p>
-                    <div className="items-center flex justify-between space-x-4 p-2 cursor-pointer bg-papasred text-papaswhite rounded-full">
-                      <AiOutlinePlus size={20} />
-                      <AiOutlineMinus size={20} />
+                    <div className="items-center flex justify-between cursor-pointer text-papaswhite">
+                      <AiOutlinePlus
+                        size={36}
+                        onClick={() => handleDealsSelection(deal)}
+                        className="select-none text-papasred"
+                      />
+                      {dealCounts[deal.id] > 0 ? (
+                        <AiOutlineMinus
+                          size={36}
+                          onClick={() => handleDealsDeselection(deal)}
+                          className="select-none text-papasred"
+                        />
+                      ) : (
+                        <AiOutlineMinus size={36} className="select-none text-papasred400 cursor-not-allowed" />
+                      )}
                     </div>
                   </div>
                 </div>
@@ -227,26 +314,21 @@ export default function OrderCard({ isOpen, setCloseOrderCard, type, size, deal 
                 {type === "soda" ? <div>{sodas}</div> : null}
                 {type === "deal" ? <div>{deals}</div> : null}
               </div>
-              <div className="fixed bottom-4 z-50 w-full max-w-4xl bg-gray-100 border border-gray-300 flex justify-end md:justify-between items-center p-5 border-t">
-                <div className="hidden md:block">
-                  <h3 className="py-2 px-8 mx-8 text-2xl rounded-lg text-papasred flex items-center">
-                    <AiOutlineMinus size={22} className="cursor-pointer" />
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    1
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <AiOutlinePlus size={22} className="cursor-pointer" />
-                  </h3>
-                </div>
+              <div className="fixed bottom-4 z-50 w-full max-w-4xl bg-gray-100 border border-gray-300 flex justify-center items-center p-5 border-t">
                 <div className="md:flex">
                   <button
                     onClick={handleAddToOrder}
                     type="button"
                     className={`py-2 px-8 mx-8 text-2xl rounded-lg bg-papasred text-papaswhite hover:bg-papasdarkred font-bold ${
-                      selectedPizzas.length !== sliceNumber || selectedPizzas.length < 1 ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'
+                      ((type === "savoury" || type === "sweet" ) && selectedPizzas.length !== sliceNumber) ||
+                      ((type === "savoury" || type === "sweet" ) && selectedPizzas.length < 1) || 
+                      totalPrice <= 1 ? 'cursor-not-allowed bg-papasred400 hover:bg-papasred400' : 'cursor-pointer'
                     }`}
-                    disabled={selectedPizzas.length !== sliceNumber || selectedPizzas.length < 1}
+                    disabled={((type === "savoury" || type === "sweet" ) && selectedPizzas.length !== sliceNumber) ||
+                    ((type === "savoury" || type === "sweet" ) && selectedPizzas.length < 1) ||
+                    totalPrice <= 1}
                   >
-                    Add to order ${totalPrice.toFixed(2)}
+                    Add to order ${Math.max(totalPrice.toFixed(2))}
                   </button>
                 </div>
               </div>

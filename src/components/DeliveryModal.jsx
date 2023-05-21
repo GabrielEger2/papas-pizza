@@ -22,7 +22,7 @@ export default function DeliveryModal({ isOpen, setCloseModal }) {
                         <div className="relative bg-gray-50 rounded-lg shadow">
                             <div className="flex bg-gray-100 border border-gray-300 items-center justify-between p-5 border-b rounded-t">
                                 <div className="switch" data-isOn={isOn} onClick={toggleSwitch}>
-                                    <motion.div className="handle flex" layout transition={spring} >
+                                    <motion.div className="handle flex select-none" layout transition={spring} >
                                         <p className="text-papaswhite text-lg font-bold">{DeliveryPickUp}</p>
                                     </motion.div>
                                 </div>

@@ -67,7 +67,7 @@ export default function Contact(){
             </div>
 
             <div className="lg:absolute lg:top-20 lg:left-20 justify-center mx-auto z-20 w-full max-w-sm space-x-3 bg-white bg-opacity-75 pb-6 lg:pb-0">
-                <div className="w-full max-w-2xl px-1 py-2 m-auto bg-gray-50 border border-gray-200 rounded-lg shadow">
+                <div className="w-full max-w-2xl px-1 py-2 m-auto bg-gray-100 border border-gray-300 rounded-lg shadow">
                 <div className="text-2xl font-bold text-center text-papasred rounded-lg">
                 89-35 Fairview, NYC 
                 </div>
@@ -76,7 +76,7 @@ export default function Contact(){
 
             <form onSubmit={sendEmail}
             className=" lg:absolute lg:right-20 right-0 justify-center mx-auto z-20 w-full max-w-sm space-x-3 bg-opacity-75"> 
-            <div className="w-full max-w-2xl px-5 py-10 m-auto bg-gray-50 border border-gray-200 rounded-lg shadow-lg">
+            <div className="w-full max-w-2xl px-5 py-10 m-auto bg-gray-100 border border-gray-300 rounded-lg shadow-lg">
                 <div className="mb-6 text-5xl font-bold text-center text-papasred title-font">
                 Contact us !
                 </div>
@@ -85,20 +85,20 @@ export default function Contact(){
                     <div className="relative">
                     <input onChange={(e) => setName(e.target.value)} value={name}
                     type="text" id="contact-form-name" 
-                    className="rounded-lg flex-1 appearance-none border border-gray-200 w-full py-2 px-4 bg-white text-papasblack placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-papaslightred focus:border-transparent" placeholder="Name"/>
+                    className="rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-papasblack placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-papaslightred focus:border-transparent" placeholder="Name"/>
                     </div>
                 </div>
                 <div className="col-span-2 lg:col-span-1">
                     <div className="relative">
                     <input onChange={(e) => setEmail(e.target.value)} value={email}
                     type="text" id="contact-form-email" 
-                    className="rounded-lg flex-1 appearance-none border border-gray-200 w-full py-2 px-4 bg-white text-papasblack placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-papaslightred focus:border-transparent" placeholder="email/phone"/>
+                    className="rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-papasblack placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-papaslightred focus:border-transparent" placeholder="email/phone"/>
                     </div>
                 </div>
                 <div className="col-span-2">
                     <label className="text-papasblack" htmlFor="name">
                     <textarea onChange={(e) => setMessage(e.target.value)} value={message}
-                    className="flex-1 w-full px-4 py-2 text-base text-papasblack placeholder-gray-400 bg-white border border-gray-200 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-papaslightred focus:border-transparent" id="order" placeholder="Enter your order" name="order" rows="5" cols="40">
+                    className="flex-1 w-full px-4 py-2 text-base text-papasblack placeholder-gray-400 bg-white border border-gray-300 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-papaslightred focus:border-transparent" id="order" placeholder="Is there anything we can help you with?" name="order" rows="5" cols="40">
                     </textarea>
                     </label>
                 </div>

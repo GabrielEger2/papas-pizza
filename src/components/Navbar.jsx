@@ -17,7 +17,7 @@ const Navbar = () => {
       if (element) {
         const topOffset = element.offsetTop;
         window.scrollTo({  // Scrolling the window to the target element
-          top: topOffset -60,
+          top: topOffset -40,
           behavior: 'smooth',
         });
       }

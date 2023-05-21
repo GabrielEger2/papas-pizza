@@ -193,7 +193,7 @@ const Order = () => {
               image="https://logowik.com/content/uploads/images/coca-cola-red-circle1983.logowik.com.webp"
               title="1L"
               description="1 Litre Soda"
-              price="$3.99 - $5.99"
+              price="$1.49 - $2.99"
               type="soda"
               size="1L"
               />
@@ -201,7 +201,7 @@ const Order = () => {
               image="https://logowik.com/content/uploads/images/coca-cola-red-circle1983.logowik.com.webp"
               title="2L"
               description="2 Litre Soda"
-              price="$6.99 - $8.99"
+              price="$2.49 - $3.99"
               type="soda"
               size="2L"
               />
