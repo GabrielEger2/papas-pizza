@@ -3,7 +3,7 @@ import { data } from '../data/PizzaData';
 import { sodaData } from '../data/SodaData';
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai';
 
-export default function OrderCard({ isOpen, setCloseOrderCard, type, size, deal }) {
+export default function OrderCard({ isOpen, setCloseOrderCard, updateOrder, type, size, deal, description, title }) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [selectedPizzas, setSelectedPizzas] = useState([]);
   const [selectedSodas, setSelectedSodas] = useState([]);
@@ -26,20 +26,19 @@ export default function OrderCard({ isOpen, setCloseOrderCard, type, size, deal 
   }
 
   const handleAddToOrder = () => {
-    console.log('Total Price:', totalPrice);
-    console.log('Selected Pizzas:', selectedPizzas);
-    console.log('Selected Sodas:', selectedSodas);
-    console.log('Number of Products:', numberOfProducts);
-    console.log('Notes:', notes);
-
+    const order = { totalPrice, selectedPizzas, selectedSodas, selectedDeals, numberOfProducts, notes, description, title, type };
+    updateOrder(order);
+    
     setTotalPrice(0);
     setSelectedPizzas([]);
     setSelectedSodas([]);
+    setSelectedDeals([]);
     setNumberOfProducts(0);
     setNotes("");
-    setPizzaCounts({}); // Reset the pizzaCounts state
-    setSodaCounts({}); // Reset the pizzaCounts state
-
+    setPizzaCounts({});
+    setSodaCounts({});
+    setDealCounts({});
+    
     setCloseOrderCard();
   };
 

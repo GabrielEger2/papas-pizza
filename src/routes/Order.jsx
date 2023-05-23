@@ -8,14 +8,27 @@ import pepperoniPizzaImg from '../assets/imgs/pizzabg.jpg';
 import StonePizzaOven from '../assets/imgs/StonePizzaOver.png';
 import OrderBox from '../components/OrderBox';
 import DeliveryModal from '../components/DeliveryModal';
+import SavedOrder from '../components/SavedOrder';
 
 const Order = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [nav, setNav] = useState(false);  // Setting up a state variable for the navigation menu
   const [openModal, setOpenModal] = useState(false);
+  const [orderArray, setOrderArray] = useState([]);
+  const [orderFinalPrice, setOrderFinalPrice] = useState(0);
 
   const handleNav = () => {
     setNav(!nav);  // Toggling the value of the navigation menu state variable
+  };
+
+  useEffect(() => {
+    // Calculate the final price whenever orderArray changes
+    const finalPrice = orderArray.reduce((total, order) => total + order.totalPrice, 0);
+    setOrderFinalPrice(finalPrice);
+  }, [orderArray]);
+
+  const updateOrder = (order) => {
+    setOrderArray((prevOrderArray) => [...prevOrderArray, order]);
   };
 
   useEffect(() => {
@@ -77,11 +90,16 @@ const Order = () => {
           </button>
           <div className='fixed bottom-0 right-0 z-50 w-[450px] justify-center flex mb-6'>
             <button className='px-4 py-4 text-2xl font-bold rounded-xl text-papaswhite bg-papasred hover:bg-papasdarkred ease-in-out duration-500'>
-              Order $0.00
+              Order ${Math.max(orderFinalPrice.toFixed(2))}
             </button>
           </div>
         </div>
-        <img className='z-40 absolute mt-16 2xl:mt-36 translate-x-2' src={StonePizzaOven} alt="Stone Oven" />
+        <div className='px-4 mt-6 overflow-y-auto' style={{ maxHeight: 'calc(100vh - 360px)' }}>
+          <div className='px-4'>
+            <SavedOrder orderArray={orderArray} />
+          </div>
+        </div>
+        <img className='z-40 absolute hidden mt-16 2xl:mt-36 translate-x-2' src={StonePizzaOven} alt="Stone Oven" />
       </nav>
       <main className="flex-1 pr-0 lg:pr-[450px]">
         <div className='absolute h-full w-full text-papaswhite max-h-60 bg-papasblack/70 flex flex-col justify-center'>
@@ -119,6 +137,7 @@ const Order = () => {
               description="Large Classic Pizzas for $10 dollars" 
               type="deal"
               deal="classic"
+              updateOrder={updateOrder}
             />
             </div>
           </section>
@@ -134,6 +153,7 @@ const Order = () => {
                 price="$7.99 - $12.99"
                 type="savoury"
                 size="small"
+                updateOrder={updateOrder}
               />
               <OrderBox
                 image="https://pastapizza.com.br/wp-content/uploads/2017/07/Pizza-Pizzaria-Forno-Forza-Express.jpg"
@@ -142,6 +162,7 @@ const Order = () => {
                 price="$9.99 - $14.99"
                 type="savoury"
                 size="medium"
+                updateOrder={updateOrder}
               />
               <OrderBox
                 image="https://pastapizza.com.br/wp-content/uploads/2017/07/Pizza-Pizzaria-Forno-Forza-Express.jpg"
@@ -150,6 +171,7 @@ const Order = () => {
                 price="$11.99 - $16.99"
                 type="savoury"
                 size="large"
+                updateOrder={updateOrder}
               />
             </div>
           </section>
@@ -165,6 +187,7 @@ const Order = () => {
               price="$7.99 - $9.99"
               type="sweet"
               size="small"
+              updateOrder={updateOrder}
               />
               <OrderBox
               image="https://static.itdg.com.br/images/1200-630/ab93c09d82d7004b7c440fe5d3d734ad/131483-original.jpg"
@@ -173,6 +196,7 @@ const Order = () => {
               price="$9.99 - $11.99"
               type="sweet"
               size="medium"
+              updateOrder={updateOrder}
               />
               <OrderBox
               image="https://static.itdg.com.br/images/1200-630/ab93c09d82d7004b7c440fe5d3d734ad/131483-original.jpg"
@@ -181,6 +205,7 @@ const Order = () => {
               price="$11.99 - $13.99"
               type="sweet"
               size="large"
+              updateOrder={updateOrder}
               />
             </div>
           </section>
@@ -196,6 +221,7 @@ const Order = () => {
               price="$1.49 - $2.99"
               type="soda"
               size="1L"
+              updateOrder={updateOrder}
               />
               <OrderBox
               image="https://logowik.com/content/uploads/images/coca-cola-red-circle1983.logowik.com.webp"
@@ -204,6 +230,7 @@ const Order = () => {
               price="$2.49 - $3.99"
               type="soda"
               size="2L"
+              updateOrder={updateOrder}
               />
             </div>
           </section>

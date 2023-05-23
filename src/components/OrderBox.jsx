@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 import OrderCard from './OrderCard';
 
-const OrderBox = (props) => {
+const OrderBox = ({ updateOrder, ...props }) => {
   const [openOrderCard, setOpenOrderCard] = useState(false);
+
+  const handleUpdateOrder = (order) => {
+    updateOrder(order);
+  };
 
   return (
     <div>
-      <OrderCard {...props} isOpen={openOrderCard} setCloseOrderCard={() => setOpenOrderCard(!openOrderCard)} />
+      <OrderCard
+        {...props}
+        isOpen={openOrderCard}
+        setCloseOrderCard={() => setOpenOrderCard(!openOrderCard)}
+        updateOrder={handleUpdateOrder}
+      />
       <div onClick={() => setOpenOrderCard(true)}>
         <div className="flex items-center bg-white border border-gray-200 rounded-lg flex-row max-w-xl hover:bg-gray-100 shadow-lg cursor-pointer">
           <img className="object-cover h-36 w-32 rounded-t-lg md:rounded-none md:rounded-l-lg" src={props.image} alt="" />
