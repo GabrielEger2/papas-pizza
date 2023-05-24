@@ -16,6 +16,9 @@ const Order = () => {
   const [openModal, setOpenModal] = useState(false);
   const [orderArray, setOrderArray] = useState([]);
   const [orderFinalPrice, setOrderFinalPrice] = useState(0);
+  const [pickupInfo, setPickupInfo] = useState(null);
+  const [deliveryAddress, setDeliveryAddress] = useState(null);
+  const [residenceDetails, setResidenceDetails] = useState(null);
 
   const handleNav = () => {
     setNav(!nav);  // Toggling the value of the navigation menu state variable
@@ -77,16 +80,43 @@ const Order = () => {
     isScrolled ? 'bg-gray-50 fixed top-0 w-full z-20 shadow-lg md:pr-[450px]' : ''
   }`;
 
+  const handleSaveModal = (pickupInfo, deliveryAddress, residenceDetails) => {
+    // Handle the saved information from the DeliveryModal
+    setPickupInfo(null);
+    setDeliveryAddress(null);
+    setResidenceDetails(null);
+
+    pickupInfo = "Pickup: " + pickupInfo;
+
+    setPickupInfo(pickupInfo);
+    setDeliveryAddress(deliveryAddress);
+    setResidenceDetails(residenceDetails);
+  };
+
   return (
     <div>
-      <DeliveryModal isOpen={openModal} setCloseModal={() => setOpenModal(!DeliveryModal)} />
+      <DeliveryModal isOpen={openModal} setCloseModal={() => setOpenModal(!DeliveryModal)} onSave={handleSaveModal} />
       <nav className="z-30 hidden lg:block fixed inset-y-0 right-0 w-[450px] float-right bg-gray-50 border-l border-l-gray-300">
         <div className='px-20'>
           <h2 className='flex justify-center mt-16 text-5xl pb-2 font-bold border-b-2 border-b-black'>
             Your Order
           </h2>
-          <button onClick={() => setOpenModal(true)} className='flex justify-center w-full mt-12 text-2xl border-2 border-black rounded-md p-1 hover:bg-gray-200 ease-in-out duration-500'>
-            Delivery Location
+          <button
+            onClick={() => setOpenModal(true)}
+            className='flex justify-center w-full mt-12 text-2xl border-2 border-black rounded-md p-1 hover:bg-gray-200 ease-in-out duration-500'
+          >
+            {pickupInfo || (deliveryAddress && residenceDetails) ? (
+              <div>
+                {pickupInfo}
+                <div>
+                  <p>
+                  {deliveryAddress}&nbsp;{residenceDetails}
+                  </p>
+                </div>
+              </div>
+            ) : (
+              'Delivery Location'
+            )}
           </button>
           <div className='fixed bottom-0 right-0 z-50 w-[450px] justify-center flex mb-6'>
             <button className='px-4 py-4 text-2xl font-bold rounded-xl text-papaswhite bg-papasred hover:bg-papasdarkred ease-in-out duration-500'>
@@ -107,7 +137,7 @@ const Order = () => {
         </div>
         <img className='w-full max-h-60 object-cover' src={pepperoniPizzaImg} alt="Pepporini pizza" />
         <nav className={navbarClass}>
-            <ul className='lg:px-20 pt-2 text-xl border-b border-b-papasligthred flex'>
+            <ul className='lg:px-20 pt-2 text-xl border-b border-b-gray-300 flex'>
                 <li className='px-3 md:px-6 hover:underline focus:underline pb-1 flex-row'>
                   <a href="#deals">Discounts</a>
                 </li>

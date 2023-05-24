@@ -1,20 +1,87 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion"; 
-import { TbBuildingStore } from 'react-icons/tb';
+import React, { useState, useEffect } from "react";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
+import { motion } from "framer-motion";
+import { TbBuildingStore } from "react-icons/tb";
 import "../index.css";
 
-export default function DeliveryModal({ isOpen, setCloseModal }) {
-    const [isOn, setIsOn] = useState(false);
-    const toggleSwitch = () => setIsOn(!isOn);
-    const spring = {
-        type: "spring",
-        stiffness: 700,
-        damping: 30
-    };
-    document.body.style.overflow = 'hidden';
-    
-    if (isOpen) {
-        const DeliveryPickUp = isOn ? "Pick Up" : "Delivery";
+export default function DeliveryModal({ isOpen, setCloseModal, onSave }) {
+  const [isOn, setIsOn] = useState(false);
+  const [address, setAddress] = useState("");
+  const [finalAdress, setFinalAdress] = useState("");
+  const [coordinates, setCoordinates] = useState({
+    lat: null,
+    lng: null,
+  });
+
+  const handleSelect = async (value) => {
+    const results = await geocodeByAddress(value);
+    const ll = await getLatLng(results[0]);
+    setAddress(value);
+    setCoordinates(ll);
+    var finalAdress = value;
+    setFinalAdress(finalAdress);
+  };
+
+  const toggleSwitch = () => setIsOn(!isOn);
+  const spring = {
+    type: "spring",
+    stiffness: 700,
+    damping: 30,
+  };
+
+  document.body.style.overflow = "hidden";
+
+  const [isWithinRange, setIsWithinRange] = useState(false);
+  const [completeAddress, setCompleteAddress] = useState(""); // Define completeAddress state variable
+  const [residenceDetails, setResidenceDetails] = useState(""); // Define residenceDetails state variable
+
+  useEffect(() => {
+    // Check if coordinates are within the range when they change
+    if (coordinates.lat && coordinates.lng) {
+      const targetCoordinates = { lat: 40.856829, lng: -73.931875 };
+      const distance = calculateDistance(coordinates, targetCoordinates);
+      setIsWithinRange(distance <= 20);
+    }
+  }, [coordinates]);
+
+  const calculateDistance = (coord1, coord2) => {
+    const R = 6371; // Radius of the Earth in kilometers
+    const dLat = deg2rad(coord2.lat - coord1.lat);
+    const dLng = deg2rad(coord2.lng - coord1.lng);
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(deg2rad(coord1.lat)) *
+        Math.cos(deg2rad(coord2.lat)) *
+        Math.sin(dLng / 2) *
+        Math.sin(dLng / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+    return distance;
+  };
+
+  const deg2rad = (deg) => {
+    return deg * (Math.PI / 180);
+  };
+
+  const handleSave = () => {
+    if (isOn) {
+      const pickupInfo = "New York, 89-35 Fairview, NYC";
+      setCloseModal();
+      // Pass the pickupInfo to the callback function
+      onSave(pickupInfo);
+    } else {
+      setCloseModal();
+      // Pass the delivery address and residence details to the callback function
+      onSave(completeAddress, residenceDetails);
+    }
+  };
+
+  if (isOpen) {
+    const DeliveryPickUp = isOn ? "Pick Up" : "Delivery";
+
         return (
             <div>
                 <div className="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-80">
@@ -27,7 +94,7 @@ export default function DeliveryModal({ isOpen, setCloseModal }) {
                                     </motion.div>
                                 </div>
                                 <button type="button" onClick={setCloseModal} className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="small-modal">
-                                    <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                                    <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"></path></svg>
                                     <span className="sr-only">Close modal</span>
                                 </button>
                             </div>
@@ -36,9 +103,9 @@ export default function DeliveryModal({ isOpen, setCloseModal }) {
                                     {isOn && 
                                     <div>
                                         <p className="text-xl leading-relaxed font-bold">
-                                            Where you can Find us:
+                                            Where you can find us:
                                         </p>
-                                        <div className="items-center flex mt-4 text-gray-700 border border-gray-300 rounded-2xl bg-gray-100 p-2">
+                                        <div className="items-center flex mt-4 text-gray-700 border border-gray-300 rounded-2xl bg-gray-50 p-2">
                                         <TbBuildingStore size={50} />
                                         <p className="text-gray-700 text-md ml-4">
                                             New York <br />
@@ -54,26 +121,108 @@ export default function DeliveryModal({ isOpen, setCloseModal }) {
                                         <p className="text-xl leading-relaxed text-papasblack font-bold">
                                             Enter your delivery address:
                                         </p>
-                                        <form>   
-                                            <label for="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-                                            <div className="relative">
-                                                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                                    <svg aria-hidden="true" className="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                                        <div className=" relative w-full justify-center flex mt-4">
+                                            
+                                            <PlacesAutocomplete
+                                                value={address}
+                                                onChange={setAddress}
+                                                onSelect={handleSelect}
+                                            >
+                                                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+                                                <div>
+                                                    <input
+                                                    {...getInputProps({
+                                                        placeholder: 'Search for your location...',
+                                                        className: 'location-search-input w-96 text-lg border border-gray-300 rounded-xl bg-gray-50 px-4 py-2 text-gray-800',
+                                                    })}
+                                                    />
+                                                    <div className="autocomplete-dropdown-container justify-center text-center absolute w-full py-1 border-gray-300">
+                                                    {loading && <div>Loading...</div>}
+                                                    {suggestions.map(suggestion => {
+                                                        const className = suggestion.active
+                                                        ? 'suggestion-item--active'
+                                                        : 'suggestion-item';
+                                                        // inline style for demonstration purpose
+                                                        const style = suggestion.active
+                                                        ? { backgroundColor: '#D1D5DB', cursor: 'pointer' }
+                                                        : { backgroundColor: '#edf2f7', cursor: 'pointer' };
+                                                        return (
+                                                        <div
+                                                            {...getSuggestionItemProps(suggestion, {
+                                                            className,
+                                                            style,
+                                                            })}
+                                                        >
+                                                            <span>{suggestion.description}</span>
+                                                        </div>
+                                                        );
+                                                    })}
+                                                    </div>
                                                 </div>
-                                                <input 
-                                                className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-2xl bg-gray-50 mt-4" 
-                                                placeholder="Search locations ..." required />
-                                                <button type="submit" className="text-papaswhite absolute right-2.5 bottom-2.5 bg-papasred hover:bg-papasred focus:ring-4 font-medium rounded-lg text-sm px-4 py-2">Search</button>
-                                            </div>
-                                        </form>    
+                                                )}
+                                            </PlacesAutocomplete>
+                                        </div>
+                                        {isWithinRange ? (
+                                            <form>
+                                                <div>
+                                                    <p className="text-xl leading-relaxed font-bold mt-4">
+                                                        Set your location:
+                                                    </p>
+                                                    <div className="items-center mt-4 text-gray-700 border border-gray-300 rounded-2xl bg-gray-50 p-2 flex justify-center">
+                                                    <p className="text-gray-700 text-lg mt-6 text-center">
+                                                        {finalAdress} <br />
+                                                        <span className="text-gray-600 text-md">
+                                                            Please fill all the fields below:
+                                                        </span>
+                                                        <div class="relative z-0 w-full mb-6 group mt-8 text-left">
+                                                            <input
+                                                                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-papasred peer"
+                                                                placeholder=" "
+                                                                required
+                                                                value={completeAddress}
+                                                                onChange={(e) => setCompleteAddress(e.target.value)}
+                                                            />
+                                                            <label className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-papasred peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Complete Adress</label>
+                                                        </div>
+                                                        <div class="relative z-0 w-full mb-6 group mt-4 text-left">
+                                                            <input
+                                                                className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-papasred peer"
+                                                                placeholder=" "
+                                                                required
+                                                                value={residenceDetails}
+                                                                onChange={(e) => setResidenceDetails(e.target.value)}
+                                                            />
+                                                            <label className="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-papasred peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Residence number/Details</label>
+                                                        </div>
+                                                    </p>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                             ) : !isWithinRange && coordinates.lat && coordinates.lng ? (
+                                                <div className=" justify-center text-center mt-8">
+                                                    <p className="text-2xl mb-2 font-bold">We can't deliver to you, yet.</p>
+                                                    <p className="text-lg text-papasred">Please select a location that is no more than 20km away from our restaurant.</p>
+                                                </div>
+                                            ) : (
+                                                <div>
+
+                                                </div>
+                                            )} 
                                     </div>
                                     }
                                 </div>
                             </div>
                             <div className="flex items-center justify-center p-4 space-x-2 border-t border-gray-300 bg-gray-100 rounded-b">
-                                <button className="py-2 px-4 mx-8 text-lg rounded-lg bg-papasred text-papaswhite hover:bg-papasdarkred font-bold">
-                                    Save
-                                </button>
+                            <button
+                                onClick={handleSave}
+                                type="button"
+                                className={`py-2 px-4 mx-8 text-lg rounded-lg bg-papasred text-papaswhite hover:bg-papasdarkred font-bold ${
+                                    !isWithinRange && !isOn ? 'cursor-not-allowed bg-papasred400 hover:bg-papasred400' : 'cursor-pointer'
+                                }`}
+                                disabled={!isWithinRange && !isOn}
+                            >
+                                Save
+                            </button>
                             </div>
                         </div>
                     </div>

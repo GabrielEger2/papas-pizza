@@ -65,10 +65,10 @@ const SavedOrder = ({ orderArray }) => {
         <div className='mt-2 h-full' key={index}>
           <div className='flex flex-col items-center bg-white border border-gray-300 rounded-lg shadow-lg md:flex-row md:max-w-xl'>
             <div className='flex flex-col justify-between leading-normal pl-2 pr-2'>
-              <h5 className='mb-2 mt-2 text-2xl font-bold tracking-tight text-gray-900'>
+              <h5 className='mb-1 mt-2 text-2xl font-bold tracking-tight text-gray-900'>
                 {order.type === 'deal' ? order.title : order.description}
               </h5>
-              <p className='mb-2 font-normal text-sm text-gray-700 overflow-hidden'>
+              <p className='mb-1 font-normal text-sm text-gray-700 overflow-hidden'>
                 {transformSelectedPizzas(order.selectedPizzas)}
                 {transformSelectedDeals(order.selectedDeals)}
                 {transformSelectedSodas(order.selectedSodas)}

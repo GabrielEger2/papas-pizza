@@ -67,7 +67,7 @@ export default function Contact(){
             </div>
 
             <div className="lg:absolute lg:top-20 lg:left-20 justify-center mx-auto z-20 w-full max-w-sm space-x-3 bg-white bg-opacity-75 pb-6 lg:pb-0">
-                <div className="w-full max-w-2xl px-1 py-2 m-auto bg-gray-100 border border-gray-300 rounded-lg shadow">
+                <div className="w-full max-w-2xl px-1 py-2 m-auto bg-gray-50 border border-gray-300 rounded-lg shadow">
                 <div className="text-2xl font-bold text-center text-papasred rounded-lg">
                 89-35 Fairview, NYC 
                 </div>
@@ -76,7 +76,7 @@ export default function Contact(){
 
             <form onSubmit={sendEmail}
             className=" lg:absolute lg:right-20 right-0 justify-center mx-auto z-20 w-full max-w-sm space-x-3 bg-opacity-75"> 
-            <div className="w-full max-w-2xl px-5 py-10 m-auto bg-gray-100 border border-gray-300 rounded-lg shadow-lg">
+            <div className="w-full max-w-2xl px-5 py-10 m-auto bg-gray-50 border border-gray-300 rounded-lg shadow-lg">
                 <div className="mb-6 text-5xl font-bold text-center text-papasred title-font">
                 Contact us !
                 </div>
