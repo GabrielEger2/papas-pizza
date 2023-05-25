@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SavedOrder = ({ orderArray }) => {
+const SavedOrder = ({ orderArray, removeOrder }) => {
   const transformSelectedPizzas = (pizzas) => {
     const pizzaCount = {};
     const transformedPizzas = [];
@@ -59,6 +59,10 @@ const SavedOrder = ({ orderArray }) => {
     return transformedDeals.join(', ');
   };
 
+  const handleRemoveOrder = (index) => {
+    removeOrder(index);
+  };
+
   return (
     <div>
       {orderArray.map((order, index) => (
@@ -76,6 +80,7 @@ const SavedOrder = ({ orderArray }) => {
               <p className='mb-2 font-normal text-papasred'>${order.totalPrice.toFixed(2)}</p>
             </div>
             <button
+              onClick={() => handleRemoveOrder(index)}
               type='button'
               className='text-gray-400 px-4 hover:text-gray-800 justify-center flex items-center ml-auto flex-shrink-0'
               data-modal-hide='large-modal'

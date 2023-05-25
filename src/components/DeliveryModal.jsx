@@ -84,7 +84,7 @@ export default function DeliveryModal({ isOpen, setCloseModal, onSave }) {
 
         return (
             <div>
-                <div className="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-80">
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80">
                     <div className="justify-center flex z-50 relative w-full max-w-md overflow-x-hidden overflow-y-auto inset-0 max-h-full mb-4 mt-4 mx-4s">
                         <div className="relative bg-gray-50 rounded-lg shadow">
                             <div className="flex bg-gray-100 border border-gray-300 items-center justify-between p-5 border-b rounded-t">
@@ -201,7 +201,7 @@ export default function DeliveryModal({ isOpen, setCloseModal, onSave }) {
                                              ) : !isWithinRange && coordinates.lat && coordinates.lng ? (
                                                 <div className=" justify-center text-center mt-8">
                                                     <p className="text-2xl mb-2 font-bold">We can't deliver to you, yet.</p>
-                                                    <p className="text-lg text-papasred">Please select a location that is no more than 20km away from our restaurant.</p>
+                                                    <p className="text-lg text-papasred">Please select a location that is no more than 20 km away from our restaurant.</p>
                                                 </div>
                                             ) : (
                                                 <div>

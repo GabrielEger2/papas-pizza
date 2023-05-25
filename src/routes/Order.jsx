@@ -34,6 +34,16 @@ const Order = () => {
     setOrderArray((prevOrderArray) => [...prevOrderArray, order]);
   };
 
+  const removeOrder = (index) => {
+    // Create a copy of the orderArray
+    const updatedOrderArray = [...orderArray];
+    // Remove the order at the specified index
+    updatedOrderArray.splice(index, 1);
+    // Update the orderArray state
+    setOrderArray(updatedOrderArray);
+  };
+
+
   useEffect(() => {
     const handleLinkClick = (event) => {  // Defining a function to handle click events on the navigation menu links
       event.preventDefault();
@@ -96,37 +106,59 @@ const Order = () => {
   return (
     <div>
       <DeliveryModal isOpen={openModal} setCloseModal={() => setOpenModal(!DeliveryModal)} onSave={handleSaveModal} />
-      <nav className="z-30 hidden lg:block fixed inset-y-0 right-0 w-[450px] float-right bg-gray-50 border-l border-l-gray-300">
+      <nav 
+      className={
+        !nav
+          ? 'z-40 fixed right-[-100%] lg:inset-y-0 lg:right-0 lg:w-[450px] lg:float-right bg-gray-50 lg:border-l lg:border-l-gray-300 hidden lg:block ease-in-out duration-500'
+          : 'z-40 fixed right-0 top-0 w-[100%] h-full border-r lg:w-[450px] lg:float-right bg-gray-50 lg:border-l lg:border-l-gray-300 ease-in-out duration-500'
+      }>
+        <div className="z-50 text-papaswhite text-3xl text-center p-1 lg:hidden cursor-pointer flex justify-center" onClick={handleNav}>
+          {nav ? (
+            <p className="bg-papasred rounded-xl px-16 py-2 fixed top-6 hover:bg-papasdarkred">
+              Close Menu
+            </p>
+          ) : (
+            <div>
+            </div>
+          )}
+        </div>
         <div className='px-20'>
-          <h2 className='flex justify-center mt-16 text-5xl pb-2 font-bold border-b-2 border-b-black'>
+          <h2 className='flex justify-center mt-24 text-5xl pb-2 font-bold border-b-2 border-b-black lg:mt-16'>
             Your Order
           </h2>
           <button
             onClick={() => setOpenModal(true)}
             className='flex justify-center w-full mt-12 text-2xl border-2 border-black rounded-md p-1 hover:bg-gray-200 ease-in-out duration-500'
           >
-            {pickupInfo || (deliveryAddress && residenceDetails) ? (
+            {pickupInfo ? (
               <div>
                 {pickupInfo}
-                <div>
-                  <p>
-                  {deliveryAddress}&nbsp;{residenceDetails}
-                  </p>
-                </div>
               </div>
-            ) : (
+            ) : deliveryAddress || residenceDetails ?  (
+              <p>
+                Delivery: {deliveryAddress}
+              </p>
+            )
+            : (
               'Delivery Location'
-            )}
+            )
+          }
           </button>
-          <div className='fixed bottom-0 right-0 z-50 w-[450px] justify-center flex mb-6'>
-            <button className='px-4 py-4 text-2xl font-bold rounded-xl text-papaswhite bg-papasred hover:bg-papasdarkred ease-in-out duration-500'>
+          <div className='fixed bottom-0 right-0 z-50 w-full lg:w-[450px] justify-center flex mb-6'>
+            <button
+              type="button"
+              className={`px-4 py-4 text-2xl font-bold rounded-xl text-papaswhite bg-papasred hover:bg-papasdarkred ease-in-out duration-500 ${
+                !deliveryAddress && !pickupInfo ? 'cursor-not-allowed bg-papasred400 hover:bg-papasred400' : 'cursor-pointer'
+              }`}
+                disabled={!pickupInfo && !deliveryAddress}
+            >
               Order ${Math.max(orderFinalPrice.toFixed(2))}
             </button>
           </div>
         </div>
         <div className='px-4 mt-6 overflow-y-auto' style={{ maxHeight: 'calc(100vh - 360px)' }}>
           <div className='px-4'>
-            <SavedOrder orderArray={orderArray} />
+            <SavedOrder orderArray={orderArray} removeOrder={removeOrder} />
           </div>
         </div>
         <img className='z-40 absolute hidden mt-16 2xl:mt-36 translate-x-2' src={StonePizzaOven} alt="Stone Oven" />
@@ -264,6 +296,16 @@ const Order = () => {
               />
             </div>
           </section>
+        </div>
+        <div className="z-50 text-papaswhite text-3xl text-center p-1 lg:hidden cursor-pointer flex justify-center" onClick={handleNav}>
+          {!nav ? (
+            <p className="bg-papasred rounded-xl px-16 fixed bottom-4 py-2 hover:bg-papasdarkred">
+              Open Menu
+            </p>
+          ) : (
+            <div>  
+            </div>
+          )}
         </div>
         <Footer />
       </main>
