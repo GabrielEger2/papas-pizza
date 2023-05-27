@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Footer from '../components/Footer';
 import Carousel from '../components/Carousel';
@@ -96,11 +98,14 @@ const Order = () => {
     setDeliveryAddress(null);
     setResidenceDetails(null);
 
-    pickupInfo = "Pickup: " + pickupInfo;
-
     setPickupInfo(pickupInfo);
     setDeliveryAddress(deliveryAddress);
     setResidenceDetails(residenceDetails);
+  };
+
+  const notify = () => {
+    toast.success("Thank you, your order has been heard loud and clear!");
+    setOrderArray([]); // Clearing the orderArray
   };
 
   return (
@@ -115,7 +120,7 @@ const Order = () => {
         <div className="z-50 text-papaswhite text-3xl text-center p-1 lg:hidden cursor-pointer flex justify-center" onClick={handleNav}>
           {nav ? (
             <p className="bg-papasred rounded-xl px-16 py-2 fixed top-6 hover:bg-papasdarkred">
-              Close Menu
+              Close Order
             </p>
           ) : (
             <div>
@@ -130,30 +135,32 @@ const Order = () => {
             onClick={() => setOpenModal(true)}
             className='flex justify-center w-full mt-12 text-2xl border-2 border-black rounded-md p-1 hover:bg-gray-200 ease-in-out duration-500'
           >
-            {pickupInfo ? (
+            {pickupInfo && !deliveryAddress ? (
               <div>
-                {pickupInfo}
+                Pickup: <br /> {pickupInfo}
               </div>
-            ) : deliveryAddress || residenceDetails ?  (
-              <p>
-                Delivery: {deliveryAddress}
-              </p>
-            )
-            : (
-              'Delivery Location'
-            )
-          }
+            ) : (
+              deliveryAddress ? (
+                <div>
+                  Delivery: <br /> {pickupInfo}
+                </div>
+              ) : (
+                <div>
+                  Delivery Location
+                </div>
+              )
+            )}
           </button>
           <div className='fixed bottom-0 right-0 z-50 w-full lg:w-[450px] justify-center flex mb-6'>
-            <button
-              type="button"
-              className={`px-4 py-4 text-2xl font-bold rounded-xl text-papaswhite bg-papasred hover:bg-papasdarkred ease-in-out duration-500 ${
-                !deliveryAddress && !pickupInfo ? 'cursor-not-allowed bg-papasred400 hover:bg-papasred400' : 'cursor-pointer'
-              }`}
-                disabled={!pickupInfo && !deliveryAddress}
-            >
-              Order ${Math.max(orderFinalPrice.toFixed(2))}
-            </button>
+          <button
+            onClick={notify}
+            className={`px-4 py-4 text-2xl font-bold rounded-xl text-papaswhite bg-papasred hover:bg-papasdarkred ease-in-out duration-500 ${
+              (!pickupInfo && !deliveryAddress) || orderFinalPrice.toFixed(2) < 1 ? 'cursor-not-allowed bg-papasred400 hover:bg-papasred400' : 'cursor-pointer'
+            }`}
+            disabled={(!pickupInfo && !deliveryAddress) || orderFinalPrice.toFixed(2) < 1}
+          >
+            Order ${orderFinalPrice.toFixed(2)}
+          </button>
           </div>
         </div>
         <div className='px-4 mt-6 overflow-y-auto' style={{ maxHeight: 'calc(100vh - 360px)' }}>
@@ -300,7 +307,7 @@ const Order = () => {
         <div className="z-50 text-papaswhite text-3xl text-center p-1 lg:hidden cursor-pointer flex justify-center" onClick={handleNav}>
           {!nav ? (
             <p className="bg-papasred rounded-xl px-16 fixed bottom-4 py-2 hover:bg-papasdarkred">
-              Open Menu
+              Open Order
             </p>
           ) : (
             <div>  
@@ -309,6 +316,7 @@ const Order = () => {
         </div>
         <Footer />
       </main>
+      <ToastContainer />
     </div>
   )
 }

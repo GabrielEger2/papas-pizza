@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { compose, withProps } from "recompose"
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import emailjs from '@emailjs/browser';
 
 
@@ -36,7 +38,8 @@ export default function Contact(){
 
     // Checking if all the required fields are filled
     if(name === '' || email === '' || message === ''){
-      alert("Please fill up all the required fields")
+      notifyError();
+      return
     }
 
     // Setting up the email parameters
@@ -49,17 +52,18 @@ export default function Contact(){
     // Sending the email using emailjs
     emailjs.send(process.env.REACT_APP_SERVICE_ID, process.env.REACT_APP_TEMPLATE_ID, templateParams, process.env.REACT_APP_PUBLIC_KEY)
     .then((response) => {
-      console.log("email sent", response.status, response.text)
+      notifySucess();
       setName('')
       setEmail('')
       setMessage('')
     })
-
   }
 
+  const notifySucess = () => toast.success("Thank you for contacting us!");
+  const notifyError = () => toast.error("Please fill all the required fields!");
 
   return (
-    <section id="contact">
+    <div id="contact">
       <div className="pt-4 lg:pt-0 p-4 max-w-[1640px] mx-auto">
         <div className="relative flex items-center flex-col lg:flex-row pb-6 lg:pb-0 lg:h-80v w-100v">
             <div className="lg:absolute inset-0 z-10 hidden lg:block">
@@ -92,7 +96,7 @@ export default function Contact(){
                     <div className="relative">
                     <input onChange={(e) => setEmail(e.target.value)} value={email}
                     type="text" id="contact-form-email" 
-                    className="rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-papasblack placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-papaslightred focus:border-transparent" placeholder="email/phone"/>
+                    className="rounded-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-papasblack placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-papaslightred focus:border-transparent" placeholder="Email/Phone"/>
                     </div>
                 </div>
                 <div className="col-span-2">
@@ -103,15 +107,17 @@ export default function Contact(){
                     </label>
                 </div>
                 <div className="col-span-2 text-right">
-                            <button type="submit" className="py-2 px-4 bg-papasred hover:bg-papasdarkred focus:ring-papasdarkred text-papaswhite w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ">
-                                Send
-                            </button>
-                        </div>
-                    </div>
+                  <button 
+                    className="py-2 px-4 bg-papasred hover:bg-papasdarkred focus:ring-papasdarkred text-papaswhite w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ">
+                    Send
+                  </button>
                 </div>
-            </form>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
-    </section>
+      <ToastContainer />
+    </div>
   );
 }

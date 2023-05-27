@@ -48,7 +48,7 @@ const Navbar = () => {
   }
   
   return (
-    <div className="bg-gray-50 fixed top-0 w-full z-50 shadow-lg">
+    <div className="bg-gray-50 fixed top-0 w-full z-40 shadow-lg">
       <div className="flex justify-between items-center h-20 max-w-[1200px] mx-auto px-6">
         <h1 className="w-full text-4xl font-bold text-papasred title-font">
           <a href="#home">Papa's Pizza</a>
