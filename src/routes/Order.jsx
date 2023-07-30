@@ -103,6 +103,24 @@ const Order = () => {
     setResidenceDetails(residenceDetails);
   };
 
+  // Function to save orderArray to localStorage
+  const saveOrderToLocalStorage = () => {
+    localStorage.setItem('userSelectedOrder', JSON.stringify(orderArray));
+  };
+
+  // Load orderArray from localStorage on component mount
+  useEffect(() => {
+    const storedOrder = localStorage.getItem('userSelectedOrder');
+    if (storedOrder) {
+      setOrderArray(JSON.parse(storedOrder));
+    }
+  }, []);
+
+  // Update localStorage whenever orderArray changes
+  useEffect(() => {
+    saveOrderToLocalStorage();
+  }, [orderArray]);
+
   const notify = () => {
     toast.success("Thank you, your order has been heard loud and clear!");
     setOrderArray([]); // Clearing the orderArray
